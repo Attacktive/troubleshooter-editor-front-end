@@ -9,9 +9,12 @@ router.get(
 	}
 );
 
-router.use((request, response, next) => {
-	//console.log("request", request);
-	//console.log("response", response);
+router.use((error, request, response, next) => {
+	if (error) {
+		console.log("request", request);
+		console.error(error);
+	}
+
 	next();
 });
 
