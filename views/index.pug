@@ -1,5 +1,18 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
+	script(src="/javascripts/index.js")
+	div.container
+		div.row
+			h1= title
+		form.row(id="file-form")
+			div.col-2
+				input(type="file", name="file", accept=".sav,.bak")
+			div.col-2
+				button(type="button" onclick="upload();")= "Upload"
+			div.col
+				button(type="button", onclick="download();")="Save"
+	div.container.mt-4
+		div.row
+			div.col-12
+				textarea(id="temp-output", readonly="readonly", style="width: 100%; min-height: 300px;")
