@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		/* https://www.staging-typescript.org/tsconfig */
+		"target": "es2016",
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": true
+	}
+}
