@@ -7,11 +7,11 @@ block content
 			h1= title
 		form.row(id="file-form")
 			div.col-2
-				input(type="file", name="file", accept=".sav,.bak")
+				input(type="file", name="file", accept=".sav,.bak", onchange="chooseFile(this.files);")
 			div.col-2
-				button(type="button" onclick="upload();")= "Upload"
+				button(type="button", id="upload-button", disabled="disabled", onclick="upload();")= "Upload"
 			div.col
-				button(type="button", onclick="download();")="Save"
+				button(type="button", id="download-button", disabled="disabled", onclick="download();")="Save"
 	div.container.mt-4
 		div.row
 			div.col-12
