@@ -17,7 +17,7 @@ router.get(
 		const file = req.file;
 		const path = file!.path;
 
-		const loaded = selectAll(path)
+		selectAll(path)
 			.then(result => {
 				res.status(200).send(result);
 			}).catch(error => {

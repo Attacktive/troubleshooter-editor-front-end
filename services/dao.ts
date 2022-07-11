@@ -5,7 +5,7 @@ const sqlite = sqlite3.verbose();
 
 let db: Database;
 
-function selectAll(pathToFile: string): Promise<Object> {
+function selectAll(pathToFile: string): Promise<Record<string, unknown>> {
 	db = new sqlite.Database(
 		pathToFile,
 		error => {
@@ -17,11 +17,11 @@ function selectAll(pathToFile: string): Promise<Object> {
 		}
 	);
 
-	return new Promise<Object>((resolve, reject) => {
+	return new Promise<Record<string, unknown>>((resolve, reject) => {
 		db.all(
 			"select companyID, CompanyName from company",
 			undefined,
-			(error: Error, rows: any[]) => {
+			(error: Error, rows: Record<string, unknown>[]) => {
 				if (error) {
 					reject(undefined);
 				} else {
