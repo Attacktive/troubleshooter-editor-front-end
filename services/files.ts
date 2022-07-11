@@ -15,15 +15,16 @@ router.get(
 	upload.single("file"),
 	(req: Request, res: Response) => {
 		const file = req.file;
-		const path = file!.path;
-
-		selectAll(path)
-			.then(result => {
-				res.status(200).send(result);
-			}).catch(error => {
+		const path = file?.path;
+		if (path !== undefined) {
+			selectAll(path)
+				.then(result => {
+					res.status(200).send(result);
+				}).catch(error => {
 				console.error("error", error);
 				res.status(500).send(error);
 			});
+		}
 	}
 );
 

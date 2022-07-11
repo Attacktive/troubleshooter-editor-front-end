@@ -10,7 +10,7 @@ router.get(
 );
 
 router.use((error, request, response, next) => {
-	if (error) {
+	if (error !== undefined) {
 		console.log("request", request);
 		console.error(error);
 	}
