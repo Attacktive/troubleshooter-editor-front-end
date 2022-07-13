@@ -18,9 +18,9 @@ jobs:
       - name: Clean install dependencies
         run: npm ci
       - name: Build
-        run: next build
+        run: ./node_modules/.bin/next build
       - name: Export
-        run: next export
+        run: ./node_modules/.bin/next export
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
