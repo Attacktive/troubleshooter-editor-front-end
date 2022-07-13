@@ -5,6 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c541d6a604db490589bbdfe45570d87f)](https://app.codacy.com/gh/Attacktive/troubleshooter-editor?utm_source=github.com&utm_medium=referral&utm_content=Attacktive/troubleshooter-editor&utm_campaign=Badge_Grade_Settings)
 ```suggestion
 [![CodeFactor](https://www.codefactor.io/repository/github/attacktive/troubleshooter-editor/badge)](https://www.codefactor.io/repository/github/attacktive/troubleshooter-editor)
+[![CodeFactor](https://www.codefactor.io/repository/github/attacktive/troubleshooter-editor/badge)](https://www.codefactor.io/repository/github/attacktive/troubleshooter-editor)
 
 First, run the development server:
 
