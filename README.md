@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c541d6a604db490589bbdfe45570d87f)](https://app.codacy.com/gh/Attacktive/troubleshooter-editor?utm_source=github.com&utm_medium=referral&utm_content=Attacktive/troubleshooter-editor&utm_campaign=Badge_Grade_Settings)
+
 First, run the development server:
 
 ```bash
