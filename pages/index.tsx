@@ -2,51 +2,50 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 const Home: NextPage = () => {
+	function upload() {
+		alert("upload");
+	}
+
+	function download() {
+		alert("download");
+	}
+
 	return (
-		<div className={styles.container}>
-			<Head>
-				<title>Troubleshooter Editor</title>
-				<meta name="description" content="Troubleshooter Editor"/>
-				<link rel="icon" href="/favicon.ico"/>
-			</Head>
+		<div>
+			<Container fluid as={"main"}>
+				<Head>
+					<title>Troubleshooter Editor</title>
+					<meta name="description" content="Troubleshooter Editor"/>
+					<link rel="icon" href="/favicon.ico"/>
+				</Head>
 
-			<main className={styles.main}>
-				<h1 className={styles.title}>
-					Troubleshooter Editor
-				</h1>
-
-				<div className={styles.grid}>
-					<a href="https://nextjs.org/docs" className={styles.card}>
-						<h2>Documentation &rarr;</h2>
-						<p>Find in-depth information about Next.js features and API.</p>
-					</a>
-
-					<a href="https://nextjs.org/learn" className={styles.card}>
-						<h2>Learn &rarr;</h2>
-						<p>Learn about Next.js in an interactive course with quizzes!</p>
-					</a>
-
-					<a
-						href="https://github.com/vercel/next.js/tree/canary/examples"
-						className={styles.card}
-					>
-						<h2>Examples &rarr;</h2>
-						<p>Discover and deploy boilerplate example Next.js projects.</p>
-					</a>
-
-					<a
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-						className={styles.card}
-					>
-						<h2>Deploy &rarr;</h2>
-						<p>
-							Instantly deploy your Next.js site to a public URL with Vercel.
-						</p>
-					</a>
-				</div>
-			</main>
+				<Row>
+					<Col>
+						<h1 className={styles.title}>
+							Troubleshooter Editor
+						</h1>
+					</Col>
+				</Row>
+				<Row as={"form"} id={"file-form"} className={"mt-4"}>
+					<Col xs={2}>
+						<input type={"file"} name={"file"} accept={".sav,.bak"}/>
+					</Col>
+					<Col xs={2}>
+						<button type={"button"} onClick={upload}>Upload</button>
+					</Col>
+					<Col>
+						<button type={"button"} onClick={download}>Save</button>
+					</Col>
+				</Row>
+				<Row className={"mt-4"}>
+					<Col>
+						<textarea id={"temp-output"} readOnly={true} style={{ width: "100%", minHeight: "300px" }}/>
+					</Col>
+				</Row>
+			</Container>
 
 			<footer className={styles.footer}>
 				<a
