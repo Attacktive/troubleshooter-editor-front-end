@@ -1,15 +1,11 @@
 import React, { useRef } from "react";
 import "./App.css";
+import github from "./images/github.svg";
 import { Container, Row, Col } from "react-bootstrap";
 
 function App() {
 	const fileForm = useRef<HTMLFormElement>();
 	const temporaryOutput = useRef<HTMLTextAreaElement>(null);
-	const styles = {
-		title: "",
-		footer: "",
-		logo: ""
-	};
 
 	function upload() {
 		const formData = new FormData(fileForm.current);
@@ -41,7 +37,7 @@ function App() {
 
 				<Row>
 					<Col>
-						<h1 className={styles.title}>
+						<h1>
 							Troubleshooter Editor
 						</h1>
 					</Col>
@@ -62,19 +58,19 @@ function App() {
 						<textarea ref={temporaryOutput} readOnly={true} style={{ width: "100%", minHeight: "300px" }}/>
 					</Col>
 				</Row>
-			</Container>
 
-			<footer className={styles.footer}>
-				<a
-					href="https://github.com/Attacktive/troubleshooter-editor"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<span className={styles.logo}>
-						<img src="./github.svg" alt="GitHub Logo" width={36} height={36}/>
+				<footer id="footer">
+					<a
+						href="https://github.com/Attacktive/troubleshooter-editor"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+					<span>
+						<img src={github} alt="to the GitHub repository" width={48} height={48}/>
 					</span>
-				</a>
-			</footer>
+					</a>
+				</footer>
+			</Container>
 		</div>
 	);
 }
