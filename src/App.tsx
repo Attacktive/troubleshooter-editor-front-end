@@ -70,7 +70,9 @@ function App() {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Learn React
+					<span className={styles.logo}>
+						<img src="./github.svg" alt="GitHub Logo" width={36} height={36}/>
+					</span>
 				</a>
 			</footer>
 		</div>
