@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import "./App.css";
 import github from "./images/github.svg";
-import { Container, Row, Col } from "react-bootstrap";
+import { apiRoot } from "./constants";
+import { Col, Container, Row } from "react-bootstrap";
 
 function App() {
 	const fileForm = useRef<HTMLFormElement>();
@@ -11,7 +12,7 @@ function App() {
 		const formData = new FormData(fileForm.current);
 
 		fetch(
-			"/files/upload",
+			`${apiRoot}/upload`,
 			{
 				method: "post",
 				body: formData
