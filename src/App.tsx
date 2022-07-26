@@ -69,9 +69,9 @@ function App() {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-					<span>
-						<img src={github} alt="to the GitHub repository" width={48} height={48}/>
-					</span>
+						<span>
+							<img src={github} alt="to the GitHub repository" width={48} height={48}/>
+						</span>
 					</a>
 				</footer>
 			</Container>
