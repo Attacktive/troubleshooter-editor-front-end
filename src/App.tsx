@@ -18,8 +18,11 @@ function App() {
 				body: formData
 			}
 		).then(response => {
-			console.log(response);
-			temporaryOutput.current!.value = response.toString();
+			response.json()
+				.then(json => {
+					console.log(json);
+					temporaryOutput.current!.value = JSON.stringify(json);
+				}).catch(error => console.log(error));
 		}).catch(error => console.log(error));
 	}
 
