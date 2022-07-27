@@ -32,13 +32,13 @@ function App() {
 
 	return (
 		<div>
-			<Container fluid as={"main"}>
-				<header>
-					<title>Troubleshooter Editor</title>
-					<meta name="description" content="Troubleshooter Editor"/>
-					<link rel="icon" href="/favicon.ico"/>
-				</header>
+			<header>
+				<title>Troubleshooter Editor</title>
+				<meta name="description" content="Troubleshooter Editor"/>
+				<link rel="icon" href="/favicon.ico"/>
+			</header>
 
+			<Container fluid as={"main"}>
 				<Row>
 					<Col>
 						<h1>
