@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c541d6a604db490589bbdfe45570d87f)](https://app.codacy.com/gh/Attacktive/troubleshooter-editor-front-end?utm_source=github.com&utm_medium=referral&utm_content=Attacktive/troubleshooter-editor-front-end&utm_campaign=Badge_Grade_Settings)
+[![CodeFactor](https://www.codefactor.io/repository/github/attacktive/troubleshooter-editor-front-end/badge)](https://www.codefactor.io/repository/github/attacktive/troubleshooter-editor-front-end)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
