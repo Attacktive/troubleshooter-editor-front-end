@@ -13,7 +13,7 @@ function Roster({ rosters }: { rosters?: Rosters }) {
 					{
 						rosters?.map(roster => {
 							return (
-								<AccordionItem eventKey={`${roster.id}`}>
+								<AccordionItem key={`${roster.id}`} eventKey={`${roster.id}`}>
 									<AccordionHeader>#{roster.id} {roster.name}</AccordionHeader>
 									<AccordionBody>
 										<FormGroup>

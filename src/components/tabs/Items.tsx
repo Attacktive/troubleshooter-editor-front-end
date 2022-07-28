@@ -13,7 +13,7 @@ function Item({ items }: { items?: Items }) {
 					{
 						items?.map(item => {
 							return (
-								<AccordionItem eventKey={`${item.id}`}>
+								<AccordionItem key={`${item.id}`} eventKey={`${item.id}`}>
 									<AccordionHeader>#{item.id} {item.type}</AccordionHeader>
 									<AccordionBody>
 										<FormGroup>
