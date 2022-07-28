@@ -1,5 +1,5 @@
 type Properties = {
-	[key: string]: any;
+	[key: string]: object;
 };
 
 export type CompanyProperties = {
