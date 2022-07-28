@@ -29,7 +29,9 @@ function App() {
 		).then(response => {
 			response.json()
 				.then(object => {
-					temporaryOutput.current!.value = JSON.stringify(object);
+					if (temporaryOutput !== null) {
+						temporaryOutput.current!.value = JSON.stringify(object);
+					}
 
 					setCompany(object["company"]);
 					setRosters(object["rosters"]);
