@@ -30,13 +30,7 @@ function Item({ items }: { items?: Items }) {
 											<FormControl type={"text"} value={item.status}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
-										{
-											Object.keys(item.properties).map(key => {
-												return (
-													<p>{key}: {item.properties[key]}</p>
-												);
-											})
-										}
+										{JSON.stringify(item.properties)}
 									</AccordionBody>
 								</AccordionItem>
 							);

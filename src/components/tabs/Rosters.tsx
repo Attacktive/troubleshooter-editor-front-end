@@ -34,13 +34,7 @@ function Roster({ rosters }: { rosters?: Rosters }) {
 											<FormControl type={"number"} value={roster.exp} min={0} step={1}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
-										{
-											Object.keys(roster.properties).map(key => {
-												return (
-													<p>{key}: {roster.properties[key]}</p>
-												);
-											})
-										}
+										{JSON.stringify(roster.properties)}
 									</AccordionBody>
 								</AccordionItem>
 							);
