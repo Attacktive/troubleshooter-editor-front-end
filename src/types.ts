@@ -42,3 +42,12 @@ export type ItemInfo = {
 };
 
 export type Items = ItemInfo[];
+
+export type QuestInfo = {
+	index: number,
+	name: string,
+	stage: number,
+	properties: Properties
+};
+
+export type Quests = QuestInfo[];

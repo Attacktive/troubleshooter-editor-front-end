@@ -6,7 +6,8 @@ import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "./components/tabs/Company";
 import Item from "./components/tabs/Items";
 import Roster from "./components/tabs/Rosters";
-import { CompanyInfo, defaultCompany, Items, Rosters } from "./types";
+import { CompanyInfo, defaultCompany, Items, Quests, Rosters } from "./types";
+import Quest from "./components/tabs/Quests";
 
 function App() {
 	const fileForm = useRef<HTMLFormElement>();
@@ -16,6 +17,7 @@ function App() {
 	const [company, setCompany] = useState<CompanyInfo>(defaultCompany);
 	const [rosters, setRosters] = useState<Rosters>([]);
 	const [items, setItems] = useState<Items>([]);
+	const [quests, setQuests] = useState<Quests>([]);
 
 	function upload() {
 		const formData = new FormData(fileForm.current);
@@ -36,6 +38,7 @@ function App() {
 					setCompany(object["company"]);
 					setRosters(object["rosters"]);
 					setItems(object["items"]);
+					setQuests(object["quests"]);
 				}).catch(error => console.log(error));
 		}).catch(error => console.log(error));
 	}
@@ -83,6 +86,9 @@ function App() {
 							</Tab>
 							<Tab title={"Items"} eventKey={"items"}>
 								<Item items={items}/>
+							</Tab>
+							<Tab title={"Quests"} eventKey={"quests"}>
+								<Quest quests={quests}/>
 							</Tab>
 						</Tabs>
 					</Col>
