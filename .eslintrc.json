@@ -20,10 +20,7 @@
 	},
 	"settings": {
 		"import/resolver": {
-			"node": {
-				"extensions": [".ts", ".tsx"],
-				"moduleDirectory": ["src", "node_modules"]
-			}
+			"project": "./tsconfig.json"
 		}
 	}
 }
