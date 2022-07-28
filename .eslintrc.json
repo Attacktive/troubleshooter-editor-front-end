@@ -17,5 +17,13 @@
 		"node": true,
 		"es6": true,
 		"jest": true
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".ts", ".tsx"],
+				"moduleDirectory": ["src", "node_modules"]
+			}
+		}
 	}
 }
