@@ -17,10 +17,5 @@
 		"node": true,
 		"es6": true,
 		"jest": true
-	},
-	"settings": {
-		"import/resolver": {
-			"project": "./tsconfig.json"
-		}
 	}
 }
