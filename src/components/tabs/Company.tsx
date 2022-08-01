@@ -21,8 +21,13 @@ function Company({ company }: { company?: CompanyInfo }) {
 				<FormGroup>
 					<FormLabel>Difficulty</FormLabel>
 					<FormSelect value={company?.properties["GameDifficulty"]}>
-						<option>dunno</option>
-						<option value={"Merciless"}>Merciless</option>
+						<option value={"None"} disabled={true}>Choose one</option>
+						<option value={"Story"}>Story</option>
+						<option value={"Safty"}>Safety</option>
+						<option value={"Easy"}>Easy</option>
+						<option value={"Normal"}>Normal</option>
+						<option value={"Hard"}>Hard</option>
+						<option value={"Merciless"}>Cruel</option>
 					</FormSelect>
 				</FormGroup>
 			</Col>
