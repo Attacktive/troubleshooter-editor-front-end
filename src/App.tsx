@@ -64,7 +64,7 @@ function App() {
 					</Col>
 				</Row>
 				<Row as={"form"} ref={fileForm} className={"mt-2"}>
-					<Col xs={2}>
+					<Col xs={4}>
 						<input type={"file"} name={"file"} accept={".sav,.bak"}/>
 					</Col>
 					<Col xs={2}>
