@@ -24,7 +24,7 @@
 		"web-vitals": "^3.0.0"
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.35.1",
+		"@typescript-eslint/eslint-plugin": "^5.36.1",
 		"@typescript-eslint/parser": "^5.35.1"
 	},
 	"scripts": {
