@@ -9,15 +9,22 @@ import Roster from "./components/tabs/Rosters";
 import { CompanyInfo, defaultCompany, Items, Quests, Rosters } from "./types";
 import Quest from "./components/tabs/Quests";
 
-function App() {
+export default function App() {
 	const fileForm = useRef<HTMLFormElement>();
 	const mainForm = useRef<HTMLFormElement>();
 	const temporaryOutput = useRef<HTMLTextAreaElement>(null);
+
+	const [fileSelected, setFileSelected] = useState<boolean>(false);
+	const [fileUploaded, setFileUploaded] = useState<boolean>(false);
 
 	const [company, setCompany] = useState<CompanyInfo>(defaultCompany);
 	const [rosters, setRosters] = useState<Rosters>([]);
 	const [items, setItems] = useState<Items>([]);
 	const [quests, setQuests] = useState<Quests>([]);
+
+	function onFileChange() {
+		setFileSelected(Boolean(fileForm.current));
+	}
 
 	function upload() {
 		const formData = new FormData(fileForm.current);
@@ -28,19 +35,30 @@ function App() {
 				method: "post",
 				body: formData
 			}
-		).then(response => {
-			response.json()
-				.then(object => {
-					if (temporaryOutput.current !== null) {
-						temporaryOutput.current.value = JSON.stringify(object);
-					}
+		)
+			.then(response => response.json())
+			.then(object => {
+				if (temporaryOutput.current !== null) {
+					temporaryOutput.current.value = JSON.stringify(object);
+				}
 
-					setCompany(object["company"]);
-					setRosters(object["rosters"]);
-					setItems(object["items"]);
-					setQuests(object["quests"]);
-				}).catch(error => console.log(error));
-		}).catch(error => console.log(error));
+				setCompany(object["company"]);
+				setRosters(object["rosters"]);
+				setItems(object["items"]);
+				setQuests(object["quests"]);
+
+				setFileUploaded(true);
+			})
+			.catch(error => {
+				console.log(error);
+
+				setCompany(defaultCompany);
+				setRosters([]);
+				setItems([]);
+				setQuests([]);
+
+				setFileUploaded(false);
+			});
 	}
 
 	function download() {
@@ -65,13 +83,13 @@ function App() {
 				</Row>
 				<Row as={"form"} ref={fileForm} className={"mt-2"}>
 					<Col xs={4}>
-						<input type={"file"} name={"file"} accept={".sav,.bak"}/>
+						<input type={"file"} name={"file"} accept={".sav,.bak"} onChange={onFileChange}/>
 					</Col>
 					<Col xs={2}>
-						<button type={"button"} onClick={upload}>Upload</button>
+						<button type={"button"} disabled={!fileSelected} onClick={upload}>Upload</button>
 					</Col>
 					<Col>
-						<button type={"button"} onClick={download}>Save</button>
+						<button type={"button"} disabled={!fileSelected || !fileUploaded} onClick={download}>Save</button>
 					</Col>
 				</Row>
 
@@ -115,5 +133,3 @@ function App() {
 		</div>
 	);
 }
-
-export default App;
