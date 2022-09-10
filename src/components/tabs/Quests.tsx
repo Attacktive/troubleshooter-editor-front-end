@@ -5,7 +5,9 @@ import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
-function Quest({ quests }: { quests?: Quests }) {
+export default function Quest({ quests }: { quests?: Quests }) {
+	const dataFetched = (quests && quests.length > 0);
+
 	return (
 		<Row>
 			<Col>
@@ -18,11 +20,11 @@ function Quest({ quests }: { quests?: Quests }) {
 									<AccordionBody>
 										<FormGroup>
 											<FormLabel>Name</FormLabel>
-											<FormControl type={"text"} defaultValue={quest.name}/>
+											<FormControl type={"text"} defaultValue={quest.name} readOnly={!dataFetched}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Stage</FormLabel>
-											<FormControl type={"number"} defaultValue={quest.stage} min={0} step={1}/>
+											<FormControl type={"number"} defaultValue={quest.stage} min={0} step={1} readOnly={!dataFetched}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
 										{JSON.stringify(quest.properties)}
@@ -36,5 +38,3 @@ function Quest({ quests }: { quests?: Quests }) {
 		</Row>
 	);
 }
-
-export default Quest;

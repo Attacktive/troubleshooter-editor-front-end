@@ -5,7 +5,9 @@ import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
-function Roster({ rosters }: { rosters?: Rosters }) {
+export default function Roster({ rosters }: { rosters?: Rosters }) {
+	const dataFetched = (rosters && rosters.length > 0);
+
 	return (
 		<Row>
 			<Col>
@@ -23,15 +25,15 @@ function Roster({ rosters }: { rosters?: Rosters }) {
 										<FormGroup>
 											<FormLabel>Class</FormLabel>
 											{/* TODO: change it to a select maybe */}
-											<FormControl type={"text"} defaultValue={roster.class}/>
+											<FormControl type={"text"} defaultValue={roster.class} readOnly={!dataFetched}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Level</FormLabel>
-											<FormControl type={"number"} defaultValue={roster.level} min={0} step={1}/>
+											<FormControl type={"number"} defaultValue={roster.level} min={0} step={1} readOnly={!dataFetched}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Exp</FormLabel>
-											<FormControl type={"number"} defaultValue={roster.exp} min={0} step={1}/>
+											<FormControl type={"number"} defaultValue={roster.exp} min={0} step={1} readOnly={!dataFetched}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
 										{JSON.stringify(roster.properties)}
@@ -45,5 +47,3 @@ function Roster({ rosters }: { rosters?: Rosters }) {
 		</Row>
 	);
 }
-
-export default Roster;
