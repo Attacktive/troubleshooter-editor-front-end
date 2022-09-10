@@ -8,19 +8,19 @@ function Company({ company }: { company?: CompanyInfo }) {
 			<Col>
 				<FormGroup>
 					<FormLabel>ID</FormLabel>
-					<FormControl type={"text"} value={company?.id} readOnly={true}/>
+					<FormControl type={"text"} defaultValue={company?.id} readOnly={true}/>
 				</FormGroup>
 				<FormGroup>
 					<FormLabel>Name</FormLabel>
-					<FormControl type={"text"} value={company?.name}/>
+					<FormControl type={"text"} defaultValue={company?.name}/>
 				</FormGroup>
 				<FormGroup>
 					<FormLabel>Vill</FormLabel>
-					<FormControl type={"number"} value={company?.vill} min={0} step={1}/>
+					<FormControl type={"number"} defaultValue={company?.vill} min={0} step={1}/>
 				</FormGroup>
 				<FormGroup>
 					<FormLabel>Difficulty</FormLabel>
-					<FormSelect value={company?.properties["GameDifficulty"]}>
+					<FormSelect defaultValue={company?.properties["GameDifficulty"]}>
 						<option value={"None"} disabled={true}>Choose one</option>
 						<option value={"Story"}>Story</option>
 						<option value={"Safty"}>Safety</option>

@@ -18,16 +18,16 @@ function Item({ items }: { items?: Items }) {
 									<AccordionBody>
 										<FormGroup>
 											<FormLabel>Type</FormLabel>
-											<FormControl type={"text"} value={item.type}/>
+											<FormControl type={"text"} defaultValue={item.type}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Count</FormLabel>
-											<FormControl type={"number"} value={item.count} min={0} step={1}/>
+											<FormControl type={"number"} defaultValue={item.count} min={0} step={1}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Level</FormLabel>
 											{/* TODO: change it to a select maybe */}
-											<FormControl type={"text"} value={item.status}/>
+											<FormControl type={"text"} defaultValue={item.status}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
 										{JSON.stringify(item.properties)}
