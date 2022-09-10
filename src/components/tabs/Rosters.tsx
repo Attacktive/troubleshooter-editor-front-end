@@ -18,20 +18,20 @@ function Roster({ rosters }: { rosters?: Rosters }) {
 									<AccordionBody>
 										<FormGroup>
 											<FormLabel>Name</FormLabel>
-											<FormControl type={"text"} value={roster.name}/>
+											<FormControl type={"text"} defaultValue={roster.name}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Class</FormLabel>
 											{/* TODO: change it to a select maybe */}
-											<FormControl type={"text"} value={roster.class}/>
+											<FormControl type={"text"} defaultValue={roster.class}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Level</FormLabel>
-											<FormControl type={"number"} value={roster.level} min={0} step={1}/>
+											<FormControl type={"number"} defaultValue={roster.level} min={0} step={1}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Exp</FormLabel>
-											<FormControl type={"number"} value={roster.exp} min={0} step={1}/>
+											<FormControl type={"number"} defaultValue={roster.exp} min={0} step={1}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
 										{JSON.stringify(roster.properties)}

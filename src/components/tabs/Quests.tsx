@@ -18,11 +18,11 @@ function Quest({ quests }: { quests?: Quests }) {
 									<AccordionBody>
 										<FormGroup>
 											<FormLabel>Name</FormLabel>
-											<FormControl type={"text"} value={quest.name}/>
+											<FormControl type={"text"} defaultValue={quest.name}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Stage</FormLabel>
-											<FormControl type={"number"} value={quest.stage} min={0} step={1}/>
+											<FormControl type={"number"} defaultValue={quest.stage} min={0} step={1}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
 										{JSON.stringify(quest.properties)}
