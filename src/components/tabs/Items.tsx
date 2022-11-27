@@ -27,7 +27,7 @@ export default function Item({ items }: { items?: Items }) {
 											<FormControl type={"number"} defaultValue={item.count} min={0} step={1} readOnly={!dataFetched}/>
 										</FormGroup>
 										<FormGroup>
-											<FormLabel>Level</FormLabel>
+											<FormLabel>Status</FormLabel>
 											{/* TODO: change it to a select maybe */}
 											<FormControl type={"text"} defaultValue={item.status}/>
 										</FormGroup>
