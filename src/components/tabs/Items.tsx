@@ -27,7 +27,7 @@ export default function Item({ items }: { items?: Items }) {
 		"SlashingResistance",
 		"Speed"
 		// TODO: add known options
-	].map(name => <option value={name}>{name}</option>);
+	].map((name, index) => <option key={index} value={name}>{name}</option>);
 
 	return (
 		<Row>
