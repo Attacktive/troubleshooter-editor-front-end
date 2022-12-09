@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion, Col, Form, FormControl, FormGroup, FormLabel, FormSelect, FormText, Row } from "react-bootstrap";
+import { Accordion, Col, FormControl, FormGroup, FormLabel, FormSelect, FormText, Row } from "react-bootstrap";
 import { Items } from "../../types";
 import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
