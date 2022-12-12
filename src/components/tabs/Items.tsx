@@ -1,11 +1,11 @@
 import React from "react";
 import { Accordion, Col, FormControl, FormGroup, FormLabel, FormSelect, FormText, Row } from "react-bootstrap";
-import { Items } from "../../types";
+import { ItemCollection } from "../../types";
 import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
-export default function Item({ items }: { items?: Items }) {
+export default function Item({ itemCollection }: { itemCollection?: ItemCollection }) {
 	const options = [
 		"Accuracy",
 		"Armor",
@@ -34,7 +34,7 @@ export default function Item({ items }: { items?: Items }) {
 			<Col>
 				<Accordion>
 					{
-						items?.map(item => {
+						itemCollection?.map(item => {
 							return (
 								<AccordionItem key={`${item.id}`} eventKey={`${item.id}`}>
 									<AccordionHeader>#{item.id} {item.type}</AccordionHeader>

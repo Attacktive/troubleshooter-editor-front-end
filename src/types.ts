@@ -31,7 +31,7 @@ export type RosterInfo = {
 	properties: Properties
 };
 
-export type Rosters = RosterInfo[];
+export type RosterCollection = RosterInfo[];
 
 export type ItemInfo = {
 	id: number,
@@ -41,7 +41,7 @@ export type ItemInfo = {
 	properties: Properties
 };
 
-export type Items = ItemInfo[];
+export type ItemCollection = ItemInfo[];
 
 export type QuestInfo = {
 	index: number,
@@ -50,4 +50,4 @@ export type QuestInfo = {
 	properties: Properties
 };
 
-export type Quests = QuestInfo[];
+export type QuestCollection = QuestInfo[];
