@@ -1,19 +1,19 @@
 import React from "react";
 import { Accordion, Col, FormControl, FormGroup, FormLabel, Row } from "react-bootstrap";
-import { Quests } from "../../types";
+import { QuestCollection } from "../../types";
 import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
-export default function Quest({ quests }: { quests?: Quests }) {
-	const dataFetched = (quests && quests.length > 0);
+export default function Quest({ questCollection }: { questCollection?: QuestCollection }) {
+	const dataFetched = (questCollection && questCollection.length > 0);
 
 	return (
 		<Row>
 			<Col>
 				<Accordion>
 					{
-						quests?.map(quest => {
+						questCollection?.map(quest => {
 							return (
 								<AccordionItem key={`${quest.index}`} eventKey={`${quest.index}`}>
 									<AccordionHeader>#{quest.index} {quest.name}</AccordionHeader>

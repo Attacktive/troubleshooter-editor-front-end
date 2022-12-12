@@ -1,19 +1,19 @@
 import React from "react";
 import { Accordion, Col, FormControl, FormGroup, FormLabel, Row } from "react-bootstrap";
-import { Rosters } from "../../types";
+import { RosterCollection } from "../../types";
 import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
-export default function Roster({ rosters }: { rosters?: Rosters }) {
-	const dataFetched = (rosters && rosters.length > 0);
+export default function Roster({ rosterCollection }: { rosterCollection?: RosterCollection }) {
+	const dataFetched = (rosterCollection && rosterCollection.length > 0);
 
 	return (
 		<Row>
 			<Col>
 				<Accordion>
 					{
-						rosters?.map(roster => {
+						rosterCollection?.map(roster => {
 							return (
 								<AccordionItem key={`${roster.id}`} eventKey={`${roster.id}`}>
 									<AccordionHeader>#{roster.id} {roster.name}</AccordionHeader>

@@ -6,7 +6,7 @@ import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "./components/tabs/Company";
 import Item from "./components/tabs/Items";
 import Roster from "./components/tabs/Rosters";
-import { CompanyInfo, defaultCompany, Items, Quests, Rosters } from "./types";
+import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "./types";
 import Quest from "./components/tabs/Quests";
 
 export default function App() {
@@ -18,9 +18,9 @@ export default function App() {
 	const [fileUploaded, setFileUploaded] = useState<boolean>(false);
 
 	const [company, setCompany] = useState<CompanyInfo>(defaultCompany);
-	const [rosters, setRosters] = useState<Rosters>([]);
-	const [items, setItems] = useState<Items>([]);
-	const [quests, setQuests] = useState<Quests>([]);
+	const [rosters, setRosters] = useState<RosterCollection>([]);
+	const [items, setItems] = useState<ItemCollection>([]);
+	const [quests, setQuests] = useState<QuestCollection>([]);
 
 	function onFileChange() {
 		setFileSelected(Boolean(fileForm.current));
@@ -100,13 +100,13 @@ export default function App() {
 								<Company company={company}/>
 							</Tab>
 							<Tab title={"Rosters"} eventKey={"rosters"}>
-								<Roster rosters={rosters}/>
+								<Roster rosterCollection={rosters}/>
 							</Tab>
 							<Tab title={"Items"} eventKey={"items"}>
-								<Item items={items}/>
+								<Item itemCollection={items}/>
 							</Tab>
 							<Tab title={"Quests"} eventKey={"quests"}>
-								<Quest quests={quests}/>
+								<Quest questCollection={quests}/>
 							</Tab>
 						</Tabs>
 					</Col>
