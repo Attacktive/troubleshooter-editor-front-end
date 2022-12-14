@@ -73,46 +73,46 @@ export default function App() {
 				<link rel="icon" href="/favicon.ico"/>
 			</header>
 
-			<Container fluid as={"main"}>
+			<Container fluid as="main">
 				<Row>
 					<Col>
-						<h1 id={"header"}>
+						<h1 id="header">
 							Troubleshooter Editor
 						</h1>
 					</Col>
 				</Row>
-				<Row as={"form"} ref={fileForm} className={"mt-2"}>
+				<Row as="form" ref={fileForm} className="mt-2">
 					<Col xs={4}>
-						<input type={"file"} name={"file"} accept={".sav,.bak"} onChange={onFileChange}/>
+						<input type="file" name="file" accept={".sav,.bak"} onChange={onFileChange}/>
 					</Col>
 					<Col xs={2}>
-						<button type={"button"} disabled={!fileSelected} onClick={upload}>Upload</button>
+						<button type="button" disabled={!fileSelected} onClick={upload}>Upload</button>
 					</Col>
 					<Col>
-						<button type={"button"} disabled={!fileSelected || !fileUploaded} onClick={download}>Save</button>
+						<button type="button" disabled={!fileSelected || !fileUploaded} onClick={download}>Save</button>
 					</Col>
 				</Row>
 
-				<Row as={"form"} ref={mainForm} className={"mt-4"}>
+				<Row as="form" ref={mainForm} className="mt-4">
 					<Col>
 						<Tabs>
-							<Tab title={"Company"} eventKey={"company"}>
-								<Company company={company}/>
+							<Tab title="Company" eventKey="company">
+								<Company initialCompany={company}/>
 							</Tab>
-							<Tab title={"Rosters"} eventKey={"rosters"}>
-								<Roster rosterCollection={rosters}/>
+							{/*<Tab title="Rosters" eventKey="rosters">
+								<Roster initialRosters={rosters}/>
+							</Tab>*/}
+							<Tab title="Items" eventKey="items">
+								<Item initialItems={items}/>
 							</Tab>
-							<Tab title={"Items"} eventKey={"items"}>
-								<Item itemCollection={items}/>
-							</Tab>
-							<Tab title={"Quests"} eventKey={"quests"}>
-								<Quest questCollection={quests}/>
-							</Tab>
+							{/*<Tab title="Quests" eventKey="quests">
+								<Quest initialQuests={quests}/>
+							</Tab>*/}
 						</Tabs>
 					</Col>
 				</Row>
 
-				<Row className={"mt-4"}>
+				<Row className="mt-4">
 					<Col>
 						<textarea ref={temporaryOutput} readOnly={true} style={{ width: "100%", minHeight: "300px" }}/>
 					</Col>
