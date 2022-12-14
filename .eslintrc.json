@@ -17,5 +17,8 @@
 		"node": true,
 		"es6": true,
 		"jest": true
+	},
+	"rules": {
+		"@typescript-eslint/no-extra-non-null-assertion": "warn"
 	}
 }

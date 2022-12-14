@@ -1,66 +1,64 @@
-import React, { useEffect, useState } from "react";
-import { Col, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Col, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
 import { CompanyInfo } from "../../types";
 
-export default function Company({ company }: { company: CompanyInfo }) {
-	const [formData, setFormData] = useState<CompanyInfo>({
+export default function Company({ initialCompany }: { initialCompany: CompanyInfo }) {
+	const [ignored, setFormData] = useState<CompanyInfo>({
 		id: 0,
 		name: "",
 		vill: -1,
 		properties: { GameDifficulty: "None" }
 	});
 
-	const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => onFormControlChange(event);
-	const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => onFormControlChange(event);
-	const onFormControlChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
-		const { name, value } = event.target;
+	const id = useRef<HTMLInputElement>(null);
+	const name = useRef<HTMLInputElement>(null);
+	const vill = useRef<HTMLInputElement>(null);
+	const difficulty = useRef<HTMLSelectElement>(null);
 
-		const newData = {
-			...formData,
-			[name]: value
-		};
-
-		// TODO: Ewwww. Any alternatives?
-		if (name === "properties.GameDifficulty") {
-			newData.properties.GameDifficulty = value;
-		}
-
-		setFormData(newData);
-	}
-
-	const dataFetched = (company.id > 0);
+	const dataFetched = (initialCompany.id > 0);
 	useEffect(
 		() => {
-		if (dataFetched) {
+			if (dataFetched) {
 				setFormData({
-					id: company.id,
-					name: company.name,
-					vill: company.vill,
-					properties: company.properties
+					id: initialCompany.id,
+					name: initialCompany.name,
+					vill: initialCompany.vill,
+					properties: initialCompany.properties
 				});
 			}
 		},
-		[company]
+		[dataFetched, initialCompany]
 	);
+
+	const onApply = () => {
+		if (id.current && name.current && vill.current && difficulty.current) {
+			setFormData({
+				id: parseInt(id.current.value),
+				name: name.current.value,
+				vill: parseInt(vill.current.value),
+				properties: { GameDifficulty: difficulty.current.value }
+			});
+		}
+	};
 
 	return (
 		<Row>
 			<Col>
 				<FormGroup>
 					<FormLabel>ID</FormLabel>
-					<FormControl type="number" name="id" value={formData.id} readOnly={true}/>
+					<FormControl ref={id} type="number" name="id" defaultValue={initialCompany.id} key={initialCompany.id} readOnly={true}/>
 				</FormGroup>
-				<FormGroup>
+				<FormGroup className="mt-2">
 					<FormLabel>Name</FormLabel>
-					<FormControl type="text" name="name" value={formData.name} readOnly={!dataFetched} onChange={onInputChange}/>
+					<FormControl ref={name} type="text" name="name" defaultValue={initialCompany.name} key={initialCompany.name} readOnly={!dataFetched}/>
 				</FormGroup>
-				<FormGroup>
+				<FormGroup className="mt-2">
 					<FormLabel>Vill</FormLabel>
-					<FormControl type="number" name="vill" value={formData.vill} min={0} step={1} readOnly={!dataFetched} onChange={onInputChange}/>
+					<FormControl ref={vill} type="number" name="vill" defaultValue={initialCompany.vill} min={0} step={1} key={initialCompany.vill} readOnly={!dataFetched}/>
 				</FormGroup>
-				<FormGroup>
+				<FormGroup className="mt-2">
 					<FormLabel>Difficulty</FormLabel>
-					<FormSelect name="properties.GameDifficulty" value={formData.properties.GameDifficulty} disabled={!dataFetched} onChange={onSelectChange}>
+					<FormSelect ref={difficulty} name="properties.GameDifficulty" defaultValue={initialCompany.properties.GameDifficulty} key={initialCompany.properties.GameDifficulty} disabled={!dataFetched}>
 						<option value={"None"} disabled={true}>Choose one</option>
 						<option value={"Story"}>Story</option>
 						<option value={"Safty"}>Safety</option>
@@ -69,6 +67,9 @@ export default function Company({ company }: { company: CompanyInfo }) {
 						<option value={"Hard"}>Hard</option>
 						<option value={"Merciless"}>Cruel</option>
 					</FormSelect>
+				</FormGroup>
+				<FormGroup className="mt-4 text-end">
+					<Button onClick={onApply}>Apply</Button>
 				</FormGroup>
 			</Col>
 		</Row>
