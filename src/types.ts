@@ -1,17 +1,17 @@
-type Properties = {
+interface Properties {
 	[key: string]: string;
-};
+}
 
-export type CompanyProperties = {
+export interface CompanyProperties {
 	GameDifficulty: string
-};
+}
 
-export type CompanyInfo = {
+export interface CompanyInfo {
 	id: number,
 	name: string,
 	vill: number,
 	properties: CompanyProperties
-};
+}
 
 export const defaultCompany: CompanyInfo = Object.freeze({
 	id: 0,
@@ -22,32 +22,32 @@ export const defaultCompany: CompanyInfo = Object.freeze({
 	}
 });
 
-export type RosterInfo = {
+export interface RosterInfo {
 	id: number,
 	name: string,
 	class: string,
 	level: number,
 	exp: number,
 	properties: Properties
-};
+}
 
 export type RosterCollection = RosterInfo[];
 
-export type ItemInfo = {
+export interface ItemInfo {
 	id: number,
 	type: string,
 	count: number,
 	status: string,
 	properties: Properties
-};
+}
 
 export type ItemCollection = ItemInfo[];
 
-export type QuestInfo = {
+export interface QuestInfo {
 	index: number,
 	name: string,
 	stage: number,
 	properties: Properties
-};
+}
 
 export type QuestCollection = QuestInfo[];
