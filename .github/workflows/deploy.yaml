@@ -1,27 +1,27 @@
-name: Deploy to gh-pages
+name: 'Deploy to gh-pages'
 on:
   push:
     branches:
-      - main
+      - 'main'
 jobs:
   build:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
+    name: 'Build and Deploy'
+    runs-on: 'ubuntu-latest'
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v1
+      - name: 'Checkout code'
+        uses: 'actions/checkout@v2'
+      - name: 'Install Node.js'
+        uses: 'actions/setup-node@v1'
         with:
-          node-version: 18.x
-      - name: Install NPM packages
-        run: npm ci
-      - name: Build project
-        run: npm run build
-      - name: Run tests
-        run: npm run test
-      - name: Deploy
+          node-version: '18.x'
+      - name: 'Install NPM packages'
+        run: 'npm ci'
+      - name: 'Build project'
+        run: 'npm run build'
+      - name: 'Run tests'
+        run: 'npm run test'
+      - name: 'Deploy'
         run: |
           git config --global user.name $user_name
           git config --global user.email $user_email
@@ -30,5 +30,5 @@ jobs:
         env:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          repository: ${{ github.repository }}
+          github_token: "${{ secrets.ACCESS_TOKEN }}"
+          repository: "${{ github.repository }}"
