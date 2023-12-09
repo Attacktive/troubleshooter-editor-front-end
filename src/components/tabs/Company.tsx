@@ -23,7 +23,7 @@ export default function Company({ company }: { company: CompanyInfo }) {
 				<FormGroup className="mt-2">
 					<FormLabel>Difficulty</FormLabel>
 					<FormSelect name="properties.GameDifficulty" defaultValue={company.properties.GameDifficulty} key={company.properties.GameDifficulty}>
-						<option value="None" disabled={true}>Choose one</option>
+						<option value="None" disabled>Choose one</option>
 						<option value="Story">Story</option>
 						<option value="Safty">Safety</option>
 						<option value="Easy">Easy</option>

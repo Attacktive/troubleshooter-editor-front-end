@@ -116,7 +116,7 @@ export default function App() {
 
 				<Row className="mt-4">
 					<Col>
-						<textarea ref={temporaryOutput} readOnly={true} style={{ width: "100%", minHeight: "300px" }}/>
+						<textarea ref={temporaryOutput} readOnly style={{ width: "100%", minHeight: "300px" }}/>
 					</Col>
 				</Row>
 
