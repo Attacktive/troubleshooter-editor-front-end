@@ -4,9 +4,9 @@ import github from "./images/github.svg";
 import { apiRoot } from "./constants";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "./components/tabs/Company";
+import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "./types";
 import Item from "./components/tabs/Items";
 import Roster from "./components/tabs/Rosters";
-import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "./types";
 import Quest from "./components/tabs/Quests";
 
 export default function App() {
@@ -18,8 +18,8 @@ export default function App() {
 	const [fileUploaded, setFileUploaded] = useState<boolean>(false);
 
 	const [company, setCompany] = useState<CompanyInfo>(defaultCompany);
-	const [rosters, setRosters] = useState<RosterCollection>([]);
 	const [items, setItems] = useState<ItemCollection>([]);
+	const [rosters, setRosters] = useState<RosterCollection>([]);
 	const [quests, setQuests] = useState<QuestCollection>([]);
 
 	function onFileChange() {
@@ -42,19 +42,21 @@ export default function App() {
 					temporaryOutput.current.value = JSON.stringify(object);
 				}
 
-				setCompany(object["company"]);
-				setRosters(object["rosters"]);
-				setItems(object["items"]);
-				setQuests(object["quests"]);
+				const { company, rosters, items, quests } = object;
+
+				setCompany(company);
+				setItems(items);
+				setRosters(rosters);
+				setQuests(quests);
 
 				setFileUploaded(true);
 			})
 			.catch(error => {
-				console.log(error);
+				console.error(error);
 
 				setCompany(defaultCompany);
-				setRosters([]);
 				setItems([]);
+				setRosters([]);
 				setQuests([]);
 
 				setFileUploaded(false);
@@ -97,17 +99,17 @@ export default function App() {
 					<Col>
 						<Tabs>
 							<Tab title="Company" eventKey="company">
-								<Company initialCompany={company}/>
+								<Company company={company}/>
 							</Tab>
-							{/*<Tab title="Rosters" eventKey="rosters">
-								<Roster initialRosters={rosters}/>
-							</Tab>*/}
+							<Tab title="Rosters" eventKey="rosters">
+								<Roster rosters={rosters}/>
+							</Tab>
 							<Tab title="Items" eventKey="items">
-								<Item initialItems={items}/>
+								<Item items={items}/>
 							</Tab>
-							{/*<Tab title="Quests" eventKey="quests">
-								<Quest initialQuests={quests}/>
-							</Tab>*/}
+							<Tab title="Quests" eventKey="quests">
+								<Quest quests={quests}/>
+							</Tab>
 						</Tabs>
 					</Col>
 				</Row>
