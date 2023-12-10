@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
 import "./App.css";
+import React, { useRef, useState } from "react";
 import github from "./images/github.svg";
 import { apiRoot } from "./constants";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
@@ -24,7 +24,7 @@ export default function App() {
 
 	const onFileChange = () => {
 		setFileSelected(Boolean(fileForm.current));
-	}
+	};
 
 	const upload = () => {
 		const formData = new FormData(fileForm.current);
@@ -63,11 +63,36 @@ export default function App() {
 
 			setFileUploaded(false);
 		});
-	}
+	};
 
 	const download = () => {
 		alert("TODO: download");
-	}
+	};
+
+	const quickCheats = () => {
+		const formData = new FormData(fileForm.current);
+
+		fetch(
+			`${apiRoot}/quick-cheats`,
+			{
+				method: "post",
+				body: formData
+			}
+		)
+		.then(response => response.blob())
+		.then(blob => {
+			console.debug("response of quick-cheats", blob);
+
+			const url = URL.createObjectURL(blob);
+			console.debug("url", url);
+
+			const anchor = document.createElement("a");
+			anchor.href = url;
+			anchor.setAttribute("download", "game.sav");
+			anchor.click();
+		})
+		.catch(console.error);
+	};
 
 	return (
 		<div>
@@ -94,6 +119,9 @@ export default function App() {
 					</Col>
 					<Col>
 						<button type="button" disabled={!fileSelected || !fileUploaded} onClick={download}>Save</button>
+					</Col>
+					<Col>
+						<button type="button" disabled={!fileSelected || !fileUploaded} onClick={quickCheats}>Quick Cheats!</button>
 					</Col>
 				</Row>
 
