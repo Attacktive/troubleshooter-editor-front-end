@@ -58,7 +58,7 @@ export default function Item({ items }: { items: ItemCollection }) {
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>OptionKey</FormLabel>
-											<FormControl type="text" name="optionKey" list="option-keys" defaultValue={item.properties["Option/OptionKey"]}/>
+											<FormControl type="text" name="optionKey" list="option-keys" defaultValue={item.properties?.["Option/OptionKey"]}/>
 											<datalist id="option-keys">
 												<option value="Extreme">Extreme</option>
 												<option value="MartialArtist">MartialArtist</option>
@@ -71,56 +71,56 @@ export default function Item({ items }: { items: ItemCollection }) {
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Bound to the character?</FormLabel>
-											<FormSelect name="isBound" defaultValue={item.properties["Binded"]}>
+											<FormSelect name="isBound" defaultValue={item.properties?.["Binded"]}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Protected?</FormLabel>
-											<FormSelect name="isProtected" defaultValue={item.properties["Protected"]}>
+											<FormSelect name="isProtected" defaultValue={item.properties?.["Protected"]}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-3">
 											<FormLabel>New?</FormLabel>
-											<FormSelect name="isNew" defaultValue={item.properties["IsNew"]}>
+											<FormSelect name="isNew" defaultValue={item.properties?.["IsNew"]}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-3">
 											<FormLabel>Property 1</FormLabel>
-											<FormControl type="text" name="optionType1" list="options-datalist" defaultValue={item.properties["Option/Type1"]}/>
+											<FormControl type="text" name="optionType1" list="options-datalist" defaultValue={item.properties?.["Option/Type1"]}/>
 											<datalist id="options-datalist">
 												{options}
 											</datalist>
-											<FormControl type="text" name="optionValue1" defaultValue={item.properties["Option/Value1"]}/>
+											<FormControl type="text" name="optionValue1" defaultValue={item.properties?.["Option/Value1"]}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Property 2</FormLabel>
-											<FormControl type="text" name="optionType2" list="options-datalist" defaultValue={item.properties["Option/Type2"]}/>
+											<FormControl type="text" name="optionType2" list="options-datalist" defaultValue={item.properties?.["Option/Type2"]}/>
 											<datalist id="options-datalist">
 												{options}
 											</datalist>
-											<FormControl type="text" name="optionValue2" defaultValue={item.properties["Option/Value2"]}/>
+											<FormControl type="text" name="optionValue2" defaultValue={item.properties?.["Option/Value2"]}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Property 3</FormLabel>
-											<FormControl type="text" name="optionType3" list="options-datalist" defaultValue={item.properties["Option/Type3"]}/>
+											<FormControl type="text" name="optionType3" list="options-datalist" defaultValue={item.properties?.["Option/Type3"]}/>
 											<datalist id="options-datalist">
 												{options}
 											</datalist>
-											<FormControl type="text" name="optionValue3" defaultValue={item.properties["Option/Value3"]}/>
+											<FormControl type="text" name="optionValue3" defaultValue={item.properties?.["Option/Value3"]}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Property 4</FormLabel>
-											<FormControl type="text" name="optionType4" list="options-datalist" defaultValue={item.properties["Option/Type4"]}/>
+											<FormControl type="text" name="optionType4" list="options-datalist" defaultValue={item.properties?.["Option/Type4"]}/>
 											<datalist id="options-datalist">
 												{options}
 											</datalist>
-											<FormControl type="text" name="optionValue4" defaultValue={item.properties["Option/Value4"]}/>
+											<FormControl type="text" name="optionValue4" defaultValue={item.properties?.["Option/Value4"]}/>
 										</FormGroup>
 										{/* TODO: Remove below as soon as debugging is done */}
 										<Accordion className="mt-3">

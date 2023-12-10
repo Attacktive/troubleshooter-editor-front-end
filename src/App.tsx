@@ -22,11 +22,11 @@ export default function App() {
 	const [rosters, setRosters] = useState<RosterCollection>([]);
 	const [quests, setQuests] = useState<QuestCollection>([]);
 
-	function onFileChange() {
+	const onFileChange = () => {
 		setFileSelected(Boolean(fileForm.current));
 	}
 
-	function upload() {
+	const upload = () => {
 		const formData = new FormData(fileForm.current);
 
 		fetch(
@@ -36,34 +36,36 @@ export default function App() {
 				body: formData
 			}
 		)
-			.then(response => response.json())
-			.then(object => {
-				if (temporaryOutput.current !== null) {
-					temporaryOutput.current.value = JSON.stringify(object);
-				}
+		.then(response => response.json())
+		.then(object => {
+			console.debug("response of /upload", object);
 
-				const { company, rosters, items, quests } = object;
+			if (temporaryOutput.current !== null) {
+				temporaryOutput.current.value = JSON.stringify(object);
+			}
 
-				setCompany(company);
-				setItems(items);
-				setRosters(rosters);
-				setQuests(quests);
+			const { company, rosters, items, quests } = object;
 
-				setFileUploaded(true);
-			})
-			.catch(error => {
-				console.error(error);
+			setCompany(company);
+			setItems(items);
+			setRosters(rosters);
+			setQuests(quests);
 
-				setCompany(defaultCompany);
-				setItems([]);
-				setRosters([]);
-				setQuests([]);
+			setFileUploaded(true);
+		})
+		.catch(error => {
+			console.error(error);
 
-				setFileUploaded(false);
-			});
+			setCompany(defaultCompany);
+			setItems([]);
+			setRosters([]);
+			setQuests([]);
+
+			setFileUploaded(false);
+		});
 	}
 
-	function download() {
+	const download = () => {
 		alert("TODO: download");
 	}
 
