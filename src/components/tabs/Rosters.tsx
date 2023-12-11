@@ -5,7 +5,7 @@ import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
-export default function Roster({ rosters }: { rosters: RosterCollection }) {
+export default function Roster({ rosters, readonly = false }: { rosters: RosterCollection, readonly: boolean }) {
 	const onApply = () => console.log("onApply");
 
 	return (
@@ -18,23 +18,22 @@ export default function Roster({ rosters }: { rosters: RosterCollection }) {
 								<AccordionItem key={`${roster.id}`} eventKey={`${roster.id}`}>
 									<AccordionHeader>#{roster.id} {roster.name}</AccordionHeader>
 									<AccordionBody>
-										<input type="hidden"/>
 										<FormGroup>
 											<FormLabel>Name</FormLabel>
-											<FormControl type="text" defaultValue={roster.name}/>
+											<FormControl type="text" defaultValue={roster.name} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Class</FormLabel>
 											{/* TODO: change it to a select maybe */}
-											<FormControl type="text" defaultValue={roster.class}/>
+											<FormControl type="text" defaultValue={roster.class} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Level</FormLabel>
-											<FormControl type="number" defaultValue={roster.level} min={0} step={1}/>
+											<FormControl type="number" defaultValue={roster.level} min={0} step={1} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Exp</FormLabel>
-											<FormControl type="number" defaultValue={roster.exp} min={0} step={1}/>
+											<FormControl type="number" defaultValue={roster.exp} min={0} step={1} disabled={readonly}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
 										{JSON.stringify(roster.properties)}
@@ -45,7 +44,7 @@ export default function Roster({ rosters }: { rosters: RosterCollection }) {
 					}
 				</Accordion>
 				<FormGroup className="mt-4 text-end">
-					<Button onClick={onApply}>Apply</Button>
+					<Button disabled={readonly} onClick={onApply}>Apply</Button>
 				</FormGroup>
 			</Col>
 		</Row>

@@ -5,7 +5,7 @@ import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
-export default function Quest({ quests }: { quests: QuestCollection }) {
+export default function Quest({ quests, readonly = false }: { quests: QuestCollection, readonly: boolean }) {
 	const onApply = () => console.log("onApply");
 
 	return (
@@ -21,11 +21,11 @@ export default function Quest({ quests }: { quests: QuestCollection }) {
 										<input type="hidden"/>
 										<FormGroup>
 											<FormLabel>Name</FormLabel>
-											<FormControl type="text" defaultValue={quest.name}/>
+											<FormControl type="text" defaultValue={quest.name} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup>
 											<FormLabel>Stage</FormLabel>
-											<FormControl type="number" defaultValue={quest.stage} min={0} step={1}/>
+											<FormControl type="number" defaultValue={quest.stage} min={0} step={1} disabled={readonly}/>
 										</FormGroup>
 										{/* TODO: handle properties */}
 										{JSON.stringify(quest.properties)}
@@ -36,7 +36,7 @@ export default function Quest({ quests }: { quests: QuestCollection }) {
 					}
 				</Accordion>
 				<FormGroup className="mt-4 text-end">
-					<Button onClick={onApply}>Apply</Button>
+					<Button disabled={readonly} onClick={onApply}>Apply</Button>
 				</FormGroup>
 			</Col>
 		</Row>
