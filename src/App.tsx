@@ -2,7 +2,7 @@ import "./App.css";
 import github from "./images/github.svg";
 import { apiRoot } from "./constants";
 import React, { useRef, useState } from "react";
-import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
+import { Button, Col, Container, FormControl, FormGroup, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "./components/tabs/Company";
 import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "./types";
 import Item from "./components/tabs/Items";
@@ -116,16 +116,18 @@ export default function App() {
 				</Row>
 				<Row as="form" ref={fileForm} className="mt-2">
 					<Col xs={4}>
-						<input type="file" name="file" accept={".sav,.bak"} onChange={onFileChange}/>
+						<FormGroup>
+							<FormControl type="file" name="file" accept={".sav,.bak"} onChange={onFileChange}/>
+						</FormGroup>
 					</Col>
 					<Col xs={2}>
-						<button type="button" disabled={!fileSelected} onClick={upload}>Upload</button>
+						<Button type="button" disabled={!fileSelected} onClick={upload}>Upload</Button>
 					</Col>
 					<Col>
-						<button type="button" disabled={true} onClick={download}>Save</button>
+						<Button type="button" disabled={true} onClick={download}>Save</Button>
 					</Col>
 					<Col>
-						<button type="button" disabled={!fileSelected || !fileUploaded} onClick={quickCheats}>Quick Cheats!</button>
+						<Button type="button" disabled={!fileSelected || !fileUploaded} onClick={quickCheats}>Quick Cheats!</Button>
 					</Col>
 				</Row>
 
