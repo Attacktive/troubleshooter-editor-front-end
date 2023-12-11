@@ -1,7 +1,7 @@
 import "./App.css";
-import React, { useRef, useState } from "react";
 import github from "./images/github.svg";
 import { apiRoot } from "./constants";
+import React, { useRef, useState } from "react";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "./components/tabs/Company";
 import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "./types";
@@ -56,13 +56,17 @@ export default function App() {
 		.catch(error => {
 			console.error(error);
 
-			setCompany(defaultCompany);
-			setItems([]);
-			setRosters([]);
-			setQuests([]);
+			resetComponents();
 
 			setFileUploaded(false);
 		});
+	};
+
+	const resetComponents = () => {
+		setCompany(defaultCompany);
+		setItems([]);
+		setRosters([]);
+		setQuests([]);
 	};
 
 	const download = () => {
@@ -118,7 +122,7 @@ export default function App() {
 						<button type="button" disabled={!fileSelected} onClick={upload}>Upload</button>
 					</Col>
 					<Col>
-						<button type="button" disabled={!fileSelected || !fileUploaded} onClick={download}>Save</button>
+						<button type="button" disabled={true} onClick={download}>Save</button>
 					</Col>
 					<Col>
 						<button type="button" disabled={!fileSelected || !fileUploaded} onClick={quickCheats}>Quick Cheats!</button>
@@ -129,16 +133,16 @@ export default function App() {
 					<Col>
 						<Tabs>
 							<Tab title="Company" eventKey="company">
-								<Company company={company}/>
+								<Company company={company} readonly={true}/>
 							</Tab>
 							<Tab title="Rosters" eventKey="rosters">
-								<Roster rosters={rosters}/>
+								<Roster rosters={rosters} readonly={true}/>
 							</Tab>
 							<Tab title="Items" eventKey="items">
-								<Item items={items}/>
+								<Item items={items} readonly={true}/>
 							</Tab>
 							<Tab title="Quests" eventKey="quests">
-								<Quest quests={quests}/>
+								<Quest quests={quests} readonly={true}/>
 							</Tab>
 						</Tabs>
 					</Col>

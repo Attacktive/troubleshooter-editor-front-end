@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Col, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
 import { CompanyInfo } from "../../types";
 
-export default function Company({ company }: { company: CompanyInfo }) {
+export default function Company({ company, readonly = false }: { company: CompanyInfo, readonly: boolean}) {
 	const onApply = () => console.log("onApply");
 
 	return (
@@ -14,15 +14,15 @@ export default function Company({ company }: { company: CompanyInfo }) {
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Name</FormLabel>
-					<FormControl type="text" name="name" defaultValue={company.name} key={company.name}/>
+					<FormControl type="text" name="name" defaultValue={company.name} key={company.name} disabled={readonly}/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Vill</FormLabel>
-					<FormControl type="number" name="vill" defaultValue={company.vill} min={0} step={1} key={company.vill}/>
+					<FormControl type="number" name="vill" defaultValue={company.vill} min={0} step={1} key={company.vill} disabled={readonly}/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Difficulty</FormLabel>
-					<FormSelect name="properties.GameDifficulty" defaultValue={company.properties.GameDifficulty} key={company.properties.GameDifficulty}>
+					<FormSelect name="properties.GameDifficulty" defaultValue={company.properties.GameDifficulty} key={company.properties.GameDifficulty} disabled={readonly}>
 						<option value="None" disabled>Choose one</option>
 						<option value="Story">Story</option>
 						<option value="Safty">Safety</option>
@@ -33,7 +33,7 @@ export default function Company({ company }: { company: CompanyInfo }) {
 					</FormSelect>
 				</FormGroup>
 				<FormGroup className="mt-4 text-end">
-					<Button onClick={onApply}>Apply</Button>
+					<Button disabled={readonly} onClick={onApply}>Apply</Button>
 				</FormGroup>
 			</Col>
 		</Row>

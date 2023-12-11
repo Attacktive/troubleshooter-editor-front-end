@@ -5,7 +5,7 @@ import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
-export default function Item({ items }: { items: ItemCollection }) {
+export default function Item({ items, readonly = false }: { items: ItemCollection, readonly: boolean }) {
 	const options = [
 		"Accuracy",
 		"Armor",
@@ -43,22 +43,22 @@ export default function Item({ items }: { items: ItemCollection }) {
 									<AccordionBody>
 										<FormGroup className="mt-2">
 											<FormLabel>Type</FormLabel>
-											<FormControl name="type" defaultValue={item.type}/>
+											<FormControl name="type" defaultValue={item.type} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Count</FormLabel>
-											<FormControl name="count" defaultValue={item.count} min={0} step={1}/>
+											<FormControl name="count" defaultValue={item.count} min={0} step={1} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Status</FormLabel>
-											<FormSelect defaultValue={item.status}>
+											<FormSelect defaultValue={item.status} disabled={readonly}>
 												<option value="inventory">Inventory</option>
 												<option value="equipped">Equipped</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>OptionKey</FormLabel>
-											<FormControl type="text" name="optionKey" list="option-keys" defaultValue={item.properties?.["Option/OptionKey"]}/>
+											<FormControl type="text" name="optionKey" list="option-keys" defaultValue={item.properties?.["Option/OptionKey"]} disabled={readonly}/>
 											<datalist id="option-keys">
 												<option value="Extreme">Extreme</option>
 												<option value="MartialArtist">MartialArtist</option>
@@ -71,56 +71,56 @@ export default function Item({ items }: { items: ItemCollection }) {
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Bound to the character?</FormLabel>
-											<FormSelect name="isBound" defaultValue={item.properties?.["Binded"]}>
+											<FormSelect name="isBound" defaultValue={item.properties?.["Binded"]} disabled={readonly}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Protected?</FormLabel>
-											<FormSelect name="isProtected" defaultValue={item.properties?.["Protected"]}>
+											<FormSelect name="isProtected" defaultValue={item.properties?.["Protected"]} disabled={readonly}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-3">
 											<FormLabel>New?</FormLabel>
-											<FormSelect name="isNew" defaultValue={item.properties?.["IsNew"]}>
+											<FormSelect name="isNew" defaultValue={item.properties?.["IsNew"]} disabled={readonly}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-3">
 											<FormLabel>Property 1</FormLabel>
-											<FormControl type="text" name="optionType1" list="options-datalist" defaultValue={item.properties?.["Option/Type1"]}/>
+											<FormControl type="text" name="optionType1" list="options-datalist" defaultValue={item.properties?.["Option/Type1"]} disabled={readonly}/>
 											<datalist id="options-datalist">
 												{options}
 											</datalist>
-											<FormControl type="text" name="optionValue1" defaultValue={item.properties?.["Option/Value1"]}/>
+											<FormControl type="text" name="optionValue1" defaultValue={item.properties?.["Option/Value1"]} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Property 2</FormLabel>
-											<FormControl type="text" name="optionType2" list="options-datalist" defaultValue={item.properties?.["Option/Type2"]}/>
+											<FormControl type="text" name="optionType2" list="options-datalist" defaultValue={item.properties?.["Option/Type2"]} disabled={readonly}/>
 											<datalist id="options-datalist">
 												{options}
 											</datalist>
-											<FormControl type="text" name="optionValue2" defaultValue={item.properties?.["Option/Value2"]}/>
+											<FormControl type="text" name="optionValue2" defaultValue={item.properties?.["Option/Value2"]} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Property 3</FormLabel>
-											<FormControl type="text" name="optionType3" list="options-datalist" defaultValue={item.properties?.["Option/Type3"]}/>
+											<FormControl type="text" name="optionType3" list="options-datalist" defaultValue={item.properties?.["Option/Type3"]} disabled={readonly}/>
 											<datalist id="options-datalist">
 												{options}
 											</datalist>
-											<FormControl type="text" name="optionValue3" defaultValue={item.properties?.["Option/Value3"]}/>
+											<FormControl type="text" name="optionValue3" defaultValue={item.properties?.["Option/Value3"]} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Property 4</FormLabel>
-											<FormControl type="text" name="optionType4" list="options-datalist" defaultValue={item.properties?.["Option/Type4"]}/>
+											<FormControl type="text" name="optionType4" list="options-datalist" defaultValue={item.properties?.["Option/Type4"]} disabled={readonly}/>
 											<datalist id="options-datalist">
 												{options}
 											</datalist>
-											<FormControl type="text" name="optionValue4" defaultValue={item.properties?.["Option/Value4"]}/>
+											<FormControl type="text" name="optionValue4" defaultValue={item.properties?.["Option/Value4"]} disabled={readonly}/>
 										</FormGroup>
 										{/* TODO: Remove below as soon as debugging is done */}
 										<Accordion className="mt-3">
@@ -142,7 +142,7 @@ export default function Item({ items }: { items: ItemCollection }) {
 					}
 				</Accordion>
 				<FormGroup className="mt-4 text-end">
-					<Button onClick={onApply}>Apply</Button>
+					<Button disabled={readonly} onClick={onApply}>Apply</Button>
 				</FormGroup>
 			</Col>
 		</Row>
