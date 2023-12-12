@@ -25,7 +25,7 @@
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-		"@typescript-eslint/eslint-plugin": "^5.62.0",
+		"@typescript-eslint/eslint-plugin": "^6.14.0",
 		"@typescript-eslint/parser": "^5.62.0",
 		"gh-pages": "^6.1.0"
 	},
