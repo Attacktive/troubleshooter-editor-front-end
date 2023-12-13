@@ -10,19 +10,19 @@ export default function Company({ company, readonly = false }: { company: Compan
 			<Col>
 				<FormGroup>
 					<FormLabel>ID</FormLabel>
-					<FormControl type="number" name="id" defaultValue={company.id} key={company.id} readOnly/>
+					<FormControl type="number" name="id" defaultValue={company.id} readOnly/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Name</FormLabel>
-					<FormControl type="text" name="name" defaultValue={company.name} key={company.name} disabled={readonly}/>
+					<FormControl type="text" name="name" defaultValue={company.name} disabled={readonly}/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Vill</FormLabel>
-					<FormControl type="number" name="vill" defaultValue={company.vill} min={0} step={1} key={company.vill} disabled={readonly}/>
+					<FormControl type="number" name="vill" defaultValue={company.vill} min={0} step={1} disabled={readonly}/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Difficulty</FormLabel>
-					<FormSelect name="properties.GameDifficulty" defaultValue={company.properties.GameDifficulty} key={company.properties.GameDifficulty} disabled={readonly}>
+					<FormSelect name="properties.GameDifficulty" defaultValue={company.properties.GameDifficulty} disabled={readonly}>
 						<option value="None" disabled>Choose one</option>
 						<option value="Story">Story</option>
 						<option value="Safty">Safety</option>
