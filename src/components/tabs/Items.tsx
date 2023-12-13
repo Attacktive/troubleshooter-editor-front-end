@@ -1,12 +1,12 @@
 import React from "react";
 import { Accordion, Button, Col, FormControl, FormGroup, FormLabel, FormSelect, FormText, Row } from "react-bootstrap";
-import { ItemCollection } from "../../types";
+import { ItemCollection, ItemInfo } from "../../types";
 import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
 
 export default function Item({ items, readonly = false }: { items: ItemCollection, readonly: boolean }) {
-	const options = [
+	const optionKeys = [
 		"Accuracy",
 		"Armor",
 		"AttackPower",
@@ -26,8 +26,24 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 		"SightRange",
 		"SlashingResistance",
 		"Speed"
-		// TODO: add known options
+		// TODO: add known option keys
 	].map((name, index) => <option key={index} value={name}>{name}</option>);
+
+	const options = (item: ItemInfo) => Array.from({ length: 5 })
+		.map((_, index: number) => {
+			const ordinal = index + 1;
+
+			return (
+				<FormGroup key={`item-${item.id}-option-${ordinal}`} className="mt-2">
+					<FormLabel>Property {ordinal}</FormLabel>
+					<FormControl type="text" name={`optionType${ordinal}`} list="options-datalist" defaultValue={item.properties?.[`Option/Type${ordinal}`]} disabled={readonly}/>
+					<datalist id="options-datalist">
+						{optionKeys}
+					</datalist>
+					<FormControl type="text" name={`optionValue${ordinal}`} defaultValue={item.properties?.[`Option/Value${ordinal}`]} disabled={readonly}/>
+				</FormGroup>
+			);
+		});
 
 	const onApply = () => console.log("onApply");
 
@@ -83,45 +99,14 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
-										<FormGroup className="mt-3">
+										<FormGroup className="mt-3 mb-1">
 											<FormLabel>New?</FormLabel>
 											<FormSelect name="isNew" defaultValue={item.properties?.["IsNew"]} disabled={readonly}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
-										<FormGroup className="mt-3">
-											<FormLabel>Property 1</FormLabel>
-											<FormControl type="text" name="optionType1" list="options-datalist" defaultValue={item.properties?.["Option/Type1"]} disabled={readonly}/>
-											<datalist id="options-datalist">
-												{options}
-											</datalist>
-											<FormControl type="text" name="optionValue1" defaultValue={item.properties?.["Option/Value1"]} disabled={readonly}/>
-										</FormGroup>
-										<FormGroup className="mt-2">
-											<FormLabel>Property 2</FormLabel>
-											<FormControl type="text" name="optionType2" list="options-datalist" defaultValue={item.properties?.["Option/Type2"]} disabled={readonly}/>
-											<datalist id="options-datalist">
-												{options}
-											</datalist>
-											<FormControl type="text" name="optionValue2" defaultValue={item.properties?.["Option/Value2"]} disabled={readonly}/>
-										</FormGroup>
-										<FormGroup className="mt-2">
-											<FormLabel>Property 3</FormLabel>
-											<FormControl type="text" name="optionType3" list="options-datalist" defaultValue={item.properties?.["Option/Type3"]} disabled={readonly}/>
-											<datalist id="options-datalist">
-												{options}
-											</datalist>
-											<FormControl type="text" name="optionValue3" defaultValue={item.properties?.["Option/Value3"]} disabled={readonly}/>
-										</FormGroup>
-										<FormGroup className="mt-2">
-											<FormLabel>Property 4</FormLabel>
-											<FormControl type="text" name="optionType4" list="options-datalist" defaultValue={item.properties?.["Option/Type4"]} disabled={readonly}/>
-											<datalist id="options-datalist">
-												{options}
-											</datalist>
-											<FormControl type="text" name="optionValue4" defaultValue={item.properties?.["Option/Value4"]} disabled={readonly}/>
-										</FormGroup>
+										{options(item)}
 										{/* TODO: Remove below as soon as debugging is done */}
 										<Accordion className="mt-3">
 											<AccordionItem eventKey={`${item.id}-raw`}>
