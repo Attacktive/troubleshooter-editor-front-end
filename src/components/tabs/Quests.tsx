@@ -15,7 +15,7 @@ export default function Quest({ quests, readonly = false }: { quests: QuestColle
 					{
 						quests.map(quest => {
 							return (
-								<AccordionItem key={`${quest.index}`} eventKey={`${quest.index}`}>
+								<AccordionItem key={quest.index} eventKey={quest.index.toString()}>
 									<AccordionHeader>#{quest.index} {quest.name}</AccordionHeader>
 									<AccordionBody>
 										<input type="hidden"/>
