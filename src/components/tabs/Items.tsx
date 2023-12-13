@@ -54,7 +54,7 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 					{
 						items.map(item => {
 							return (
-								<AccordionItem key={`${item.id}`} eventKey={`${item.id}`}>
+								<AccordionItem key={item.id} eventKey={item.id.toString()}>
 									<AccordionHeader>#{item.id} {item.type}</AccordionHeader>
 									<AccordionBody>
 										<FormGroup className="mt-2">

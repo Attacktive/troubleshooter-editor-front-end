@@ -15,7 +15,7 @@ export default function Roster({ rosters, readonly = false }: { rosters: RosterC
 					{
 						rosters.map(roster => {
 							return (
-								<AccordionItem key={`${roster.id}`} eventKey={`${roster.id}`}>
+								<AccordionItem key={roster.id} eventKey={roster.id.toString()}>
 									<AccordionHeader>#{roster.id} {roster.name}</AccordionHeader>
 									<AccordionBody>
 										<FormGroup>
