@@ -23,7 +23,7 @@ export default function Company({ company, readonly = false }: { company: Compan
 				<FormGroup className="mt-2">
 					<FormLabel>Difficulty</FormLabel>
 					<FormSelect name="properties.GameDifficulty" defaultValue={company.properties.GameDifficulty} disabled={readonly}>
-						<option value="None" disabled>Choose one</option>
+						<option value={undefined} disabled>Choose one</option>
 						<option value="Story">Story</option>
 						<option value="Safty">Safety</option>
 						<option value="Easy">Easy</option>
