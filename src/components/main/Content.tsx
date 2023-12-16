@@ -9,7 +9,6 @@ import Quest from "components/tabs/Quests";
 export default function Content() {
 	const fileForm = useRef<HTMLFormElement>();
 	const mainForm = useRef<HTMLFormElement>();
-	const temporaryOutput = useRef<HTMLTextAreaElement>(null);
 
 	const [fileSelected, setFileSelected] = useState<boolean>(false);
 	const [fileUploaded, setFileUploaded] = useState<boolean>(false);
@@ -18,6 +17,8 @@ export default function Content() {
 	const [items, setItems] = useState<ItemCollection>([]);
 	const [rosters, setRosters] = useState<RosterCollection>([]);
 	const [quests, setQuests] = useState<QuestCollection>([]);
+
+	const debuggingOutput = useRef<string>("");
 
 	const onFileChange = () => {
 		setFileSelected(Boolean(fileForm.current));
@@ -37,9 +38,7 @@ export default function Content() {
 		.then(object => {
 			console.debug("response of /upload", object);
 
-			if (temporaryOutput.current !== null) {
-				temporaryOutput.current.value = JSON.stringify(object);
-			}
+			debuggingOutput.current = JSON.stringify(object);
 
 			const { company, rosters, items, quests } = object;
 
@@ -135,7 +134,7 @@ export default function Content() {
 
 			<Row className="mt-4">
 				<Col>
-					<textarea ref={temporaryOutput} readOnly style={{ width: "100%", minHeight: "300px" }}/>
+					<textarea value={debuggingOutput.current} readOnly style={{ width: "100%", minHeight: "300px" }}/>
 				</Col>
 			</Row>
 		</>
