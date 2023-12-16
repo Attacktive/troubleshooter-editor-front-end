@@ -59,15 +59,23 @@ export default function Content() {
 		});
 	};
 
-	const resetComponents = () => {
-		setCompany(defaultCompany);
-		setItems([]);
-		setRosters([]);
-		setQuests([]);
-	};
+	const save = () => {
+		const formData = new FormData(fileForm.current);
+		formData.append("edited", JSON.stringify({ company, rosters, items, quests }));
 
-	const download = () => {
-		alert("TODO: download");
+		fetch(
+			`${process.env.REACT_APP_API_ROOT}/save`,
+			{
+				method: "post",
+				body: formData
+			}
+		)
+		.then(response => response.blob())
+		.then(downloadFile)
+		.catch(error => {
+			console.error(error);
+			debuggingOutput.current = error;
+		});
 	};
 
 	const quickCheats = () => {
@@ -81,21 +89,28 @@ export default function Content() {
 			}
 		)
 		.then(response => response.blob())
-		.then(blob => {
-			console.debug("response of quick-cheats", blob);
-
-			const url = URL.createObjectURL(blob);
-			console.debug("url", url);
-
-			const anchor = document.createElement("a");
-			anchor.href = url;
-			anchor.setAttribute("download", "game.sav");
-			anchor.click();
-		})
+		.then(downloadFile)
 		.catch(error => {
 			console.error(error);
 			debuggingOutput.current = error;
 		});
+	};
+
+	const resetComponents = () => {
+		setCompany(defaultCompany);
+		setItems([]);
+		setRosters([]);
+		setQuests([]);
+	};
+
+	const downloadFile = (blob: Blob) => {
+		const url = URL.createObjectURL(blob);
+		console.debug("url", url);
+
+		const anchor = document.createElement("a");
+		anchor.href = url;
+		anchor.setAttribute("download", "cheated.sav");
+		anchor.click();
 	};
 
 	return (
@@ -110,7 +125,7 @@ export default function Content() {
 					<Button type="button" disabled={!fileSelected} onClick={upload}>Upload</Button>
 				</Col>
 				<Col>
-					<Button type="button" disabled={true} onClick={download}>Save</Button>
+					<Button type="button" disabled={!fileSelected || !fileUploaded} onClick={save}>Save</Button>
 				</Col>
 				<Col>
 					<Button type="button" disabled={!fileSelected || !fileUploaded} onClick={quickCheats}>Quick Cheats!</Button>
@@ -121,7 +136,7 @@ export default function Content() {
 				<Col>
 					<Tabs>
 						<Tab title="Company" eventKey="company">
-							<Company company={company} readonly={true}/>
+							<Company company={company} setCompany={setCompany} readonly={true}/>
 						</Tab>
 						<Tab title="Rosters" eventKey="rosters">
 							<Roster rosters={rosters} readonly={true}/>

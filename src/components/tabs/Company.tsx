@@ -1,9 +1,28 @@
-import React from "react";
-import { Button, Col, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { Col, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
 import { CompanyInfo } from "types";
 
-export default function Company({ company, readonly = false }: { company: CompanyInfo, readonly: boolean }) {
-	const onApply = () => console.log("onApply");
+export default function Company({ company, setCompany, readonly = false }: { company: CompanyInfo, setCompany: Dispatch<SetStateAction<CompanyInfo>>, readonly: boolean }) {
+	const setName = (event: ChangeEvent<HTMLInputElement>) => {
+		const name = event.target.value;
+		setCompany({ ...company, name });
+	};
+	const setVill = (event: ChangeEvent<HTMLInputElement>) => {
+		const vill = event.target.valueAsNumber;
+		setCompany({ ...company, vill });
+	};
+
+	const setDifficulty = (event: ChangeEvent<HTMLSelectElement>) => {
+		const difficulty = event.target.value;
+
+		setCompany({
+			...company,
+			properties: {
+				...company.properties,
+				GameDifficulty: difficulty
+			}
+		});
+	};
 
 	return (
 		<Row>
@@ -14,15 +33,15 @@ export default function Company({ company, readonly = false }: { company: Compan
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Name</FormLabel>
-					<FormControl type="text" name="name" defaultValue={company.name} disabled={readonly}/>
+					<FormControl type="text" name="name" defaultValue={company.name} disabled={readonly} onInput={setName}/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Vill</FormLabel>
-					<FormControl type="number" name="vill" defaultValue={company.vill} min={0} step={1} disabled={readonly}/>
+					<FormControl type="number" name="vill" defaultValue={company.vill} min={0} step={1} disabled={readonly} onInput={setVill}/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Difficulty</FormLabel>
-					<FormSelect name="properties.GameDifficulty" defaultValue={company.properties.GameDifficulty} disabled={readonly}>
+					<FormSelect name="properties.GameDifficulty" defaultValue={company.properties.GameDifficulty} disabled={readonly} onInput={setDifficulty}>
 						<option value={undefined} disabled>Choose one</option>
 						<option value="Story">Story</option>
 						<option value="Safty">Safety</option>
@@ -31,9 +50,6 @@ export default function Company({ company, readonly = false }: { company: Compan
 						<option value="Hard">Hard</option>
 						<option value="Merciless">Cruel</option>
 					</FormSelect>
-				</FormGroup>
-				<FormGroup className="mt-4 text-end">
-					<Button disabled={readonly} onClick={onApply}>Apply</Button>
 				</FormGroup>
 			</Col>
 		</Row>
