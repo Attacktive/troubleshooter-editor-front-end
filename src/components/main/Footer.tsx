@@ -3,7 +3,7 @@ import github from "images/github.svg";
 
 export default function Footer() {
 	return (
-		<footer id="footer">
+		<footer id="footer" className="mt-2">
 			<a
 				href="https://github.com/Attacktive/troubleshooter-editor"
 				target="_blank"
