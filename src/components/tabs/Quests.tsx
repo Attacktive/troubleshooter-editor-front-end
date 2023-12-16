@@ -1,9 +1,7 @@
 import React from "react";
-import { Accordion, Button, Col, FormControl, FormGroup, FormLabel, Row } from "react-bootstrap";
-import { QuestCollection } from "../../types";
-import AccordionItem from "react-bootstrap/AccordionItem";
-import AccordionHeader from "react-bootstrap/AccordionHeader";
+import { Accordion, AccordionHeader, AccordionItem, Button, Col, FormControl, FormGroup, FormLabel, Row } from "react-bootstrap";
 import AccordionBody from "react-bootstrap/AccordionBody";
+import { QuestCollection } from "types";
 
 export default function Quest({ quests, readonly = false }: { quests: QuestCollection, readonly: boolean }) {
 	const onApply = () => console.log("onApply");

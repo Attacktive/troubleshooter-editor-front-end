@@ -1,9 +1,9 @@
 import React from "react";
 import { Accordion, Button, Col, FormControl, FormGroup, FormLabel, FormSelect, FormText, Row } from "react-bootstrap";
-import { ItemCollection, ItemInfo } from "../../types";
 import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
+import { ItemCollection, ItemInfo } from "types";
 
 export default function Item({ items, readonly = false }: { items: ItemCollection, readonly: boolean }) {
 	const optionKeys = [
