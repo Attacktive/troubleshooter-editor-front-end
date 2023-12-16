@@ -134,7 +134,7 @@ export default function Content() {
 
 			<Row className="mt-4">
 				<Col>
-					<textarea value={debuggingOutput.current} readOnly style={{ width: "100%", minHeight: "300px" }}/>
+					<FormControl as="textarea" defaultValue={debuggingOutput.current} rows={6}/>
 				</Col>
 			</Row>
 		</>
