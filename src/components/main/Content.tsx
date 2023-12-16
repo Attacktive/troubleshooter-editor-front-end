@@ -51,6 +51,7 @@ export default function Content() {
 		})
 		.catch(error => {
 			console.error(error);
+			debuggingOutput.current = error;
 
 			resetComponents();
 
@@ -91,7 +92,10 @@ export default function Content() {
 			anchor.setAttribute("download", "game.sav");
 			anchor.click();
 		})
-		.catch(console.error);
+		.catch(error => {
+			console.error(error);
+			debuggingOutput.current = error;
+		});
 	};
 
 	return (
