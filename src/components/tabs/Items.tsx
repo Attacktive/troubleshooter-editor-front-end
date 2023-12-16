@@ -69,13 +69,17 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 											<FormLabel>Status</FormLabel>
 											<FormSelect defaultValue={item.status} disabled={readonly}>
 												<option value="inventory">Inventory</option>
+												<option value="warehouse">Warehouse</option>
 												<option value="equipped">Equipped</option>
+												<option value="stasis">Stasis</option>
+												<option value="mailbox">Mailbox</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>OptionKey</FormLabel>
 											<FormControl type="text" name="optionKey" list="option-keys" defaultValue={item.properties?.["Option/OptionKey"]} disabled={readonly}/>
 											<datalist id="option-keys">
+												<option value={undefined}></option>
 												<option value="Extreme">Extreme</option>
 												<option value="MartialArtist">MartialArtist</option>
 												<option value="MeteorScout">MeteorScout</option>
