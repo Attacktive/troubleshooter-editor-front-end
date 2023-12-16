@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Col, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
-import { CompanyInfo } from "../../types";
+import { CompanyInfo } from "types";
 
-export default function Company({ company, readonly = false }: { company: CompanyInfo, readonly: boolean}) {
+export default function Company({ company, readonly = false }: { company: CompanyInfo, readonly: boolean }) {
 	const onApply = () => console.log("onApply");
 
 	return (
