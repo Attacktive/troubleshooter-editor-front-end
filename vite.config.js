@@ -11,5 +11,10 @@ export default defineConfig(() => {
 			react(),
 			viteTsconfigPaths()
 		],
+		test: {
+			globals: true,
+			environment: "jsdom",
+			setupFiles: ["./src/test/setup.ts"]
+		}
 	};
 });
