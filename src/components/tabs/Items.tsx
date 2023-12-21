@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion, Button, Col, FormControl, FormGroup, FormLabel, FormSelect, FormText, Row } from "react-bootstrap";
+import { Accordion, Col, FormControl, FormGroup, FormLabel, FormSelect, FormText, Row } from "react-bootstrap";
 import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
@@ -44,8 +44,6 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 				</FormGroup>
 			);
 		});
-
-	const onApply = () => console.log("onApply");
 
 	return (
 		<Row>
@@ -130,9 +128,6 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 						})
 					}
 				</Accordion>
-				<FormGroup className="mt-4 text-end">
-					<Button disabled={readonly} onClick={onApply}>Apply</Button>
-				</FormGroup>
 			</Col>
 		</Row>
 	);
