@@ -5,12 +5,10 @@
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"plugins": ["@typescript-eslint"],
 	"extends": [
 		"react-app",
 		"react-app/jest",
-		"plugin:@typescript-eslint/eslint-recommended",
-		"plugin:@typescript-eslint/recommended"
+		"plugin:@typescript-eslint/eslint-recommended"
 	],
 	"env": {
 		"browser": true,
