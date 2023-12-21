@@ -1,11 +1,9 @@
 import React from "react";
-import { Accordion, AccordionHeader, AccordionItem, Button, Col, FormControl, FormGroup, FormLabel, Row } from "react-bootstrap";
+import { Accordion, AccordionHeader, AccordionItem, Col, FormControl, FormGroup, FormLabel, Row } from "react-bootstrap";
 import AccordionBody from "react-bootstrap/AccordionBody";
 import { RosterCollection } from "../../types";
 
 export default function Roster({ rosters, readonly = false }: { rosters: RosterCollection, readonly: boolean }) {
-	const onApply = () => console.log("onApply");
-
 	return (
 		<Row>
 			<Col>
@@ -41,9 +39,6 @@ export default function Roster({ rosters, readonly = false }: { rosters: RosterC
 						})
 					}
 				</Accordion>
-				<FormGroup className="mt-4 text-end">
-					<Button disabled={readonly} onClick={onApply}>Apply</Button>
-				</FormGroup>
 			</Col>
 		</Row>
 	);
