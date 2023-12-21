@@ -6,6 +6,8 @@ import Roster from "components/tabs/Rosters";
 import Item from "components/tabs/Items";
 import Quest from "components/tabs/Quests";
 
+const apiRoot = import.meta.env.VITE_API_ROOT;
+
 export default function Content() {
 	const fileForm = useRef<HTMLFormElement>();
 	const mainForm = useRef<HTMLFormElement>();
@@ -28,7 +30,7 @@ export default function Content() {
 		const formData = new FormData(fileForm.current);
 
 		fetch(
-			`${process.env.REACT_APP_API_ROOT}/upload`,
+			`${apiRoot}/upload`,
 			{
 				method: "post",
 				body: formData
@@ -64,7 +66,7 @@ export default function Content() {
 		formData.append("edited", JSON.stringify({ company, rosters, items, quests }));
 
 		fetch(
-			`${process.env.REACT_APP_API_ROOT}/save`,
+			`${apiRoot}/save`,
 			{
 				method: "post",
 				body: formData
@@ -82,7 +84,7 @@ export default function Content() {
 		const formData = new FormData(fileForm.current);
 
 		fetch(
-			`${process.env.REACT_APP_API_ROOT}/quick-cheats`,
+			`${apiRoot}/quick-cheats`,
 			{
 				method: "post",
 				body: formData
