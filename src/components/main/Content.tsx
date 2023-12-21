@@ -138,7 +138,7 @@ export default function Content() {
 				<Col>
 					<Tabs>
 						<Tab title="Company" eventKey="company">
-							<Company company={company} setCompany={setCompany} readonly={true}/>
+							<Company company={company} setCompany={setCompany}/>
 						</Tab>
 						<Tab title="Rosters" eventKey="rosters">
 							<Roster rosters={rosters} readonly={true}/>

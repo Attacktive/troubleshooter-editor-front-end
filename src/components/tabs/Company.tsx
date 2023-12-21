@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { Col, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
 import { CompanyInfo } from "types";
 
-export default function Company({ company, setCompany, readonly = false }: { company: CompanyInfo, setCompany: Dispatch<SetStateAction<CompanyInfo>>, readonly: boolean }) {
+export default function Company({ company, setCompany, readonly = false }: { company: CompanyInfo, setCompany: Dispatch<SetStateAction<CompanyInfo>>, readonly?: boolean }) {
 	const setName = (event: ChangeEvent<HTMLInputElement>) => {
 		const name = event.target.value;
 		setCompany({ ...company, name });
