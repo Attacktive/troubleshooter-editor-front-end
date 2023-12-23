@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import axios, { AxiosRequestConfig } from "axios";
 import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "types";
 import { Button, Col, FormControl, FormGroup, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "components/tabs/Company";
@@ -7,6 +8,7 @@ import Item from "components/tabs/Items";
 import Quest from "components/tabs/Quests";
 
 const apiRoot = import.meta.env.VITE_API_ROOT;
+const axiosRequestConfig: AxiosRequestConfig = { responseType: "blob" };
 
 export default function Content() {
 	const fileForm = useRef<HTMLFormElement>();
@@ -29,36 +31,30 @@ export default function Content() {
 	const upload = () => {
 		const formData = new FormData(fileForm.current);
 
-		fetch(
-			`${apiRoot}/upload`,
-			{
-				method: "post",
-				body: formData
-			}
-		)
-		.then(response => response.json())
-		.then(object => {
-			console.debug("response of /upload", object);
+		axios.post(`${apiRoot}/upload`, formData)
+			.then(response => response.data)
+			.then(object => {
+				console.debug("response of /upload", object);
 
-			debuggingOutput.current = JSON.stringify(object);
+				debuggingOutput.current = JSON.stringify(object);
 
-			const { company, rosters, items, quests } = object;
+				const { company, rosters, items, quests } = object;
 
-			setCompany(company);
-			setItems(items);
-			setRosters(rosters);
-			setQuests(quests);
+				setCompany(company);
+				setItems(items);
+				setRosters(rosters);
+				setQuests(quests);
 
-			setFileUploaded(true);
-		})
-		.catch(error => {
-			console.error(error);
-			debuggingOutput.current = error;
+				setFileUploaded(true);
+			})
+			.catch(error => {
+				console.error(error);
+				debuggingOutput.current = error;
 
-			resetComponents();
+				resetComponents();
 
-			setFileUploaded(false);
-		});
+				setFileUploaded(false);
+			});
 	};
 
 	const save = () => {
@@ -71,37 +67,25 @@ export default function Content() {
 		const formData = new FormData(fileForm.current);
 		formData.append("edited", blob);
 
-		fetch(
-			`${apiRoot}/save`,
-			{
-				method: "post",
-				body: formData
-			}
-		)
-		.then(response => response.blob())
-		.then(downloadFile)
-		.catch(error => {
-			console.error(error);
-			debuggingOutput.current = error;
-		});
+		axios.post(`${apiRoot}/save`, formData, axiosRequestConfig)
+			.then(response => response.data)
+			.then(downloadFile)
+			.catch(error => {
+				console.error(error);
+				debuggingOutput.current = error;
+			});
 	};
 
 	const quickCheats = () => {
 		const formData = new FormData(fileForm.current);
 
-		fetch(
-			`${apiRoot}/quick-cheats`,
-			{
-				method: "post",
-				body: formData
-			}
-		)
-		.then(response => response.blob())
-		.then(downloadFile)
-		.catch(error => {
-			console.error(error);
-			debuggingOutput.current = error;
-		});
+		axios.post(`${apiRoot}/quick-cheats`, formData, axiosRequestConfig)
+			.then(response => response.data)
+			.then(downloadFile)
+			.catch(error => {
+				console.error(error);
+				debuggingOutput.current = error;
+			});
 	};
 
 	const resetComponents = () => {
