@@ -62,8 +62,14 @@ export default function Content() {
 	};
 
 	const save = () => {
+		const stringified = JSON.stringify({ company, rosters, items, quests });
+		const blob = new Blob(
+			[stringified],
+			{ type: "application/json" }
+		);
+
 		const formData = new FormData(fileForm.current);
-		formData.append("edited", JSON.stringify({ company, rosters, items, quests }));
+		formData.append("edited", blob);
 
 		fetch(
 			`${apiRoot}/save`,
