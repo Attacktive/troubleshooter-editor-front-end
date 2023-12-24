@@ -7,12 +7,10 @@ import Footer from "./components/main/Footer";
 
 export default function App() {
 	return (
-		<div>
-			<Container fluid as="main">
-				<Header/>
-				<Content/>
-				<Footer/>
-			</Container>
-		</div>
+		<Container fluid as="main">
+			<Header/>
+			<Content/>
+			<Footer/>
+		</Container>
 	);
 }
