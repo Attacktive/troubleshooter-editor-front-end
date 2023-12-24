@@ -107,7 +107,7 @@ export default function Content() {
 
 	return (
 		<>
-			<Row as="form" ref={fileForm} className="mt-2">
+			<Row className="mt-2">
 				<Col xs={4}>
 					<FormGroup>
 						<FormControl type="file" name="file" accept={".sav,.bak"} onChange={onFileChange}/>
