@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { ChangeEvent, useMemo, useRef, useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "types";
 import { Button, Col, FormControl, FormGroup, Row, Tab, Tabs } from "react-bootstrap";
@@ -13,26 +13,25 @@ const axiosRequestConfig: AxiosRequestConfig = { responseType: "blob" };
 
 export default function Content() {
 	const mainForm = useRef<HTMLFormElement>(null);
-	const fileInput = useRef<HTMLInputElement>(null);
 	const debuggingOutput = useRef("");
 
 	const [fileIsUploaded, setFileIsUploaded] = useState(false);
 	const [toShowSpinner, setToShowSpinner] = useState(false);
+	const [file, setFile] = useState<File>();
 	const [company, setCompany] = useState<CompanyInfo>(defaultCompany);
 	const [items, setItems] = useState<ItemCollection>([]);
 	const [rosters, setRosters] = useState<RosterCollection>([]);
 	const [quests, setQuests] = useState<QuestCollection>([]);
 
-	const fileIsSelected = useMemo(
-		() => {
-			return Boolean(fileInput.current?.files?.length);
-		},
-		[fileInput]
-	);
+	const fileIsSelected = useMemo(() => file, [file]);
+
+	const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setFile(event.target.files?.[0]);
+	};
 
 	const upload = () => {
 		const formData = new FormData();
-		formData.append("file", fileInput.current!.files![0])
+		formData.append("file", file!);
 
 		setToShowSpinner(true);
 
@@ -71,7 +70,7 @@ export default function Content() {
 		);
 
 		const formData = new FormData();
-		formData.append("file", fileInput.current!.files![0])
+		formData.append("file", file!);
 		formData.append("edited", blob);
 
 		setToShowSpinner(true);
@@ -88,7 +87,7 @@ export default function Content() {
 
 	const quickCheats = () => {
 		const formData = new FormData();
-		formData.append("file", fileInput.current!.files![0])
+		formData.append("file", file!);
 
 		setToShowSpinner(true);
 
@@ -125,7 +124,7 @@ export default function Content() {
 			<Row className="mt-2">
 				<Col xs={4}>
 					<FormGroup>
-						<FormControl ref={fileInput} type="file" name="file" accept={".sav,.bak"}/>
+						<FormControl type="file" accept={".sav,.bak"} onChange={(event: ChangeEvent<HTMLInputElement>) => onFileChange(event)}/>
 					</FormGroup>
 				</Col>
 				<Col xs={2}>
