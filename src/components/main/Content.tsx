@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useMemo, useRef, useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
-import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection, SaveData } from "types";
+import { CompanyInfo, defaultCompany, ItemCollection, Properties, QuestCollection, RosterCollection, SaveData, truncateCompanyInfo, truncateItems } from "types";
 import { Button, Col, FormControl, FormGroup, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "components/tabs/Company";
 import Roster from "components/tabs/Rosters";
@@ -14,6 +14,7 @@ const axiosRequestConfig: AxiosRequestConfig = { responseType: "blob" };
 export default function Content() {
 	const mainForm = useRef<HTMLFormElement>(null);
 	const debuggingOutput = useRef("");
+	const companyProperties = useRef<Properties>();
 
 	const [fileIsUploaded, setFileIsUploaded] = useState(false);
 	const [toShowSpinner, setToShowSpinner] = useState(false);
@@ -33,12 +34,12 @@ export default function Content() {
 		setToShowSpinner(true);
 
 		axios.post<SaveData>(`${apiRoot}/upload`, generateFormData())
-			.then(({ data }) => {
-				console.debug("response of /upload", data);
+			.then(({ data: saveData }) => {
+				console.debug("response of /upload", saveData);
 
-				debuggingOutput.current = JSON.stringify(data);
+				debuggingOutput.current = JSON.stringify(saveData);
 
-				const { company, rosters, items, quests } = data;
+				const { company, rosters, items, quests } = truncateSaveData(saveData);
 
 				setCompany(company);
 				setItems(items);
@@ -81,6 +82,23 @@ export default function Content() {
 			})
 			.finally(() => setToShowSpinner(false));
 	};
+
+	const truncateSaveData = (saveData: SaveData): SaveData => {
+		const { company, items, quests, rosters } = saveData;
+
+		companyProperties.current = company.properties;
+
+		const truncatedCompany = truncateCompanyInfo(company);
+		const truncatedItems = truncateItems(items);
+
+		return {
+			company: truncatedCompany,
+			items: truncatedItems,
+			quests,
+			rosters
+		};
+	};
+
 
 	const generateFormData = (toSubmitEdits: boolean = false) => {
 		if (!file) {
@@ -146,11 +164,11 @@ export default function Content() {
 						<Tab title="Company" eventKey="company">
 							<Company company={company} setCompany={setCompany}/>
 						</Tab>
-						<Tab title="Rosters" eventKey="rosters">
-							<Roster rosters={rosters} readonly={true}/>
-						</Tab>
 						<Tab title="Items" eventKey="items">
 							<Item items={items} readonly={true}/>
+						</Tab>
+						<Tab title="Rosters" eventKey="rosters">
+							<Roster rosters={rosters} readonly={true}/>
 						</Tab>
 						<Tab title="Quests" eventKey="quests">
 							<Quest quests={quests} readonly={true}/>
