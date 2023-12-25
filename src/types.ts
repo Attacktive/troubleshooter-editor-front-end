@@ -5,11 +5,11 @@ export interface SaveData {
 	rosters: RosterCollection;
 }
 
-interface Properties {
+export interface Properties {
 	[key: string]: string;
 }
 
-export interface CompanyProperties {
+export interface CompanyProperties extends Properties {
 	GameDifficulty: string
 }
 
@@ -44,7 +44,7 @@ export interface ItemInfo {
 	id: number,
 	type: string,
 	count: number,
-	status: string,
+	status: "inventory" | "warehouse" | "equipped" | "statis" | "mailbox",
 	properties: Properties
 }
 
@@ -58,3 +58,18 @@ export interface QuestInfo {
 }
 
 export type QuestCollection = QuestInfo[];
+
+export function truncateCompanyInfo(company: CompanyInfo): CompanyInfo {
+	return {
+		id: company.id,
+		name: company.name,
+		vill: company.vill,
+		properties: {
+			GameDifficulty: company.properties.GameDifficulty
+		}
+	};
+}
+
+export function truncateItems(items: ItemCollection): ItemCollection {
+	return items.filter(item => item.status === "equipped");
+}

@@ -1,13 +1,14 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { BaseSyntheticEvent, ChangeEvent, Dispatch, SetStateAction } from "react";
 import { Col, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
 import { CompanyInfo } from "types";
 
 export default function Company({ company, setCompany, readonly = false }: { company: CompanyInfo, setCompany: Dispatch<SetStateAction<CompanyInfo>>, readonly?: boolean }) {
-	const setName = (event: ChangeEvent<HTMLInputElement>) => {
+	const setName = (event: BaseSyntheticEvent) => {
 		const name = event.target.value;
 		setCompany({ ...company, name });
-	};
-	const setVill = (event: ChangeEvent<HTMLInputElement>) => {
+	}
+
+	const setVill = (event: BaseSyntheticEvent) => {
 		const vill = event.target.valueAsNumber;
 		setCompany({ ...company, vill });
 	};
@@ -33,11 +34,11 @@ export default function Company({ company, setCompany, readonly = false }: { com
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Name</FormLabel>
-					<FormControl type="text" defaultValue={company.name} disabled={readonly} onInput={setName}/>
+					<FormControl type="text" defaultValue={company.name} disabled={readonly} onBlur={setName}/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Vill</FormLabel>
-					<FormControl type="number" defaultValue={company.vill} min={0} step={1} disabled={readonly} onInput={setVill}/>
+					<FormControl type="number" defaultValue={company.vill} min={0} step={1} disabled={readonly} onBlur={setVill}/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Difficulty</FormLabel>
