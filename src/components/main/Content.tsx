@@ -32,7 +32,7 @@ export default function Content() {
 
 	const upload = () => {
 		const formData = new FormData();
-		formData.append("file", fileInput.current!!.files!![0])
+		formData.append("file", fileInput.current!.files![0])
 
 		setToShowSpinner(true);
 
@@ -71,7 +71,7 @@ export default function Content() {
 		);
 
 		const formData = new FormData();
-		formData.append("file", fileInput.current!!.files!![0])
+		formData.append("file", fileInput.current!.files![0])
 		formData.append("edited", blob);
 
 		setToShowSpinner(true);
@@ -88,7 +88,7 @@ export default function Content() {
 
 	const quickCheats = () => {
 		const formData = new FormData();
-		formData.append("file", fileInput.current!!.files!![0])
+		formData.append("file", fileInput.current!.files![0])
 
 		setToShowSpinner(true);
 
