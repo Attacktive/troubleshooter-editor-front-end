@@ -57,11 +57,11 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 									<AccordionBody>
 										<FormGroup className="mt-2">
 											<FormLabel>Type</FormLabel>
-											<FormControl name="type" defaultValue={item.type} disabled={readonly}/>
+											<FormControl defaultValue={item.type} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Count</FormLabel>
-											<FormControl name="count" defaultValue={item.count} min={0} step={1} disabled={readonly}/>
+											<FormControl defaultValue={item.count} min={0} step={1} disabled={readonly}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Status</FormLabel>
@@ -75,7 +75,7 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>OptionKey</FormLabel>
-											<FormControl type="text" name="optionKey" list="option-keys" defaultValue={item.properties?.["Option/OptionKey"]} disabled={readonly}/>
+											<FormControl type="text" list="option-keys" defaultValue={item.properties?.["Option/OptionKey"]} disabled={readonly}/>
 											<datalist id="option-keys">
 												<option value={undefined}></option>
 												<option value="Extreme">Extreme</option>
@@ -89,21 +89,21 @@ export default function Item({ items, readonly = false }: { items: ItemCollectio
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Bound to the character?</FormLabel>
-											<FormSelect name="isBound" defaultValue={item.properties?.["Binded"]} disabled={readonly}>
+											<FormSelect defaultValue={item.properties?.["Binded"]} disabled={readonly}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Protected?</FormLabel>
-											<FormSelect name="isProtected" defaultValue={item.properties?.["Protected"]} disabled={readonly}>
+											<FormSelect defaultValue={item.properties?.["Protected"]} disabled={readonly}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
 										</FormGroup>
 										<FormGroup className="mt-3 mb-1">
 											<FormLabel>New?</FormLabel>
-											<FormSelect name="isNew" defaultValue={item.properties?.["IsNew"]} disabled={readonly}>
+											<FormSelect defaultValue={item.properties?.["IsNew"]} disabled={readonly}>
 												<option value="true">true</option>
 												<option value="false">false</option>
 											</FormSelect>
