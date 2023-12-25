@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "types";
 import { Button, Col, FormControl, FormGroup, Row, Tab, Tabs } from "react-bootstrap";
@@ -6,30 +6,35 @@ import Company from "components/tabs/Company";
 import Roster from "components/tabs/Rosters";
 import Item from "components/tabs/Items";
 import Quest from "components/tabs/Quests";
+import Spinner from "./Spinner";
 
 const apiRoot = import.meta.env.VITE_API_ROOT;
 const axiosRequestConfig: AxiosRequestConfig = { responseType: "blob" };
 
 export default function Content() {
-	const fileForm = useRef<HTMLFormElement>();
-	const mainForm = useRef<HTMLFormElement>();
+	const mainForm = useRef<HTMLFormElement>(null);
+	const fileInput = useRef<HTMLInputElement>(null);
+	const debuggingOutput = useRef("");
 
-	const [fileSelected, setFileSelected] = useState<boolean>(false);
-	const [fileUploaded, setFileUploaded] = useState<boolean>(false);
-
+	const [fileIsUploaded, setFileIsUploaded] = useState(false);
+	const [toShowSpinner, setToShowSpinner] = useState(false);
 	const [company, setCompany] = useState<CompanyInfo>(defaultCompany);
 	const [items, setItems] = useState<ItemCollection>([]);
 	const [rosters, setRosters] = useState<RosterCollection>([]);
 	const [quests, setQuests] = useState<QuestCollection>([]);
 
-	const debuggingOutput = useRef<string>("");
-
-	const onFileChange = () => {
-		setFileSelected(Boolean(fileForm.current));
-	};
+	const fileIsSelected = useMemo(
+		() => {
+			return Boolean(fileInput.current?.files?.length);
+		},
+		[fileInput]
+	);
 
 	const upload = () => {
-		const formData = new FormData(fileForm.current);
+		const formData = new FormData();
+		formData.append("file", fileInput.current!!.files!![0])
+
+		setToShowSpinner(true);
 
 		axios.post(`${apiRoot}/upload`, formData)
 			.then(response => response.data)
@@ -45,7 +50,7 @@ export default function Content() {
 				setRosters(rosters);
 				setQuests(quests);
 
-				setFileUploaded(true);
+				setFileIsUploaded(true);
 			})
 			.catch(error => {
 				console.error(error);
@@ -53,8 +58,9 @@ export default function Content() {
 
 				resetComponents();
 
-				setFileUploaded(false);
-			});
+				setFileIsUploaded(false);
+			})
+			.finally(() => setToShowSpinner(false));
 	};
 
 	const save = () => {
@@ -64,8 +70,11 @@ export default function Content() {
 			{ type: "application/json" }
 		);
 
-		const formData = new FormData(fileForm.current);
+		const formData = new FormData();
+		formData.append("file", fileInput.current!!.files!![0])
 		formData.append("edited", blob);
+
+		setToShowSpinner(true);
 
 		axios.post(`${apiRoot}/save`, formData, axiosRequestConfig)
 			.then(response => response.data)
@@ -73,11 +82,15 @@ export default function Content() {
 			.catch(error => {
 				console.error(error);
 				debuggingOutput.current = error;
-			});
+			})
+			.finally(() => setToShowSpinner(false));
 	};
 
 	const quickCheats = () => {
-		const formData = new FormData(fileForm.current);
+		const formData = new FormData();
+		formData.append("file", fileInput.current!!.files!![0])
+
+		setToShowSpinner(true);
 
 		axios.post(`${apiRoot}/quick-cheats`, formData, axiosRequestConfig)
 			.then(response => response.data)
@@ -85,7 +98,8 @@ export default function Content() {
 			.catch(error => {
 				console.error(error);
 				debuggingOutput.current = error;
-			});
+			})
+			.finally(() => setToShowSpinner(false));
 	};
 
 	const resetComponents = () => {
@@ -107,20 +121,21 @@ export default function Content() {
 
 	return (
 		<>
+			<Spinner show={toShowSpinner}/>
 			<Row className="mt-2">
 				<Col xs={4}>
 					<FormGroup>
-						<FormControl type="file" name="file" accept={".sav,.bak"} onChange={onFileChange}/>
+						<FormControl ref={fileInput} type="file" name="file" accept={".sav,.bak"}/>
 					</FormGroup>
 				</Col>
 				<Col xs={2}>
-					<Button type="button" disabled={!fileSelected} onClick={upload}>Upload</Button>
+					<Button type="button" disabled={!fileIsSelected} onClick={upload}>Upload</Button>
 				</Col>
 				<Col>
-					<Button type="button" disabled={!fileSelected || !fileUploaded} onClick={save}>Save</Button>
+					<Button type="button" disabled={!fileIsSelected || !fileIsUploaded} onClick={save}>Save</Button>
 				</Col>
 				<Col>
-					<Button type="button" disabled={!fileSelected || !fileUploaded} onClick={quickCheats}>Quick Cheats!</Button>
+					<Button type="button" disabled={!fileIsSelected || !fileIsUploaded} onClick={quickCheats}>Quick Cheats!</Button>
 				</Col>
 			</Row>
 
