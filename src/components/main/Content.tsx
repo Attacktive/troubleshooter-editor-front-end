@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useMemo, useRef, useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
-import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection } from "types";
+import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection, SaveData } from "types";
 import { Button, Col, FormControl, FormGroup, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "components/tabs/Company";
 import Roster from "components/tabs/Rosters";
@@ -30,19 +30,15 @@ export default function Content() {
 	};
 
 	const upload = () => {
-		const formData = new FormData();
-		formData.append("file", file!);
-
 		setToShowSpinner(true);
 
-		axios.post(`${apiRoot}/upload`, formData)
-			.then(response => response.data)
-			.then(object => {
-				console.debug("response of /upload", object);
+		axios.post<SaveData>(`${apiRoot}/upload`, generateFormData())
+			.then(({ data }) => {
+				console.debug("response of /upload", data);
 
-				debuggingOutput.current = JSON.stringify(object);
+				debuggingOutput.current = JSON.stringify(data);
 
-				const { company, rosters, items, quests } = object;
+				const { company, rosters, items, quests } = data;
 
 				setCompany(company);
 				setItems(items);
@@ -63,21 +59,10 @@ export default function Content() {
 	};
 
 	const save = () => {
-		const stringified = JSON.stringify({ company, rosters, items, quests });
-		const blob = new Blob(
-			[stringified],
-			{ type: "application/json" }
-		);
-
-		const formData = new FormData();
-		formData.append("file", file!);
-		formData.append("edited", blob);
-
 		setToShowSpinner(true);
 
-		axios.post(`${apiRoot}/save`, formData, axiosRequestConfig)
-			.then(response => response.data)
-			.then(downloadFile)
+		axios.post<Blob>(`${apiRoot}/save`, generateFormData(true), axiosRequestConfig)
+			.then(({ data }) => downloadFile(data))
 			.catch(error => {
 				console.error(error);
 				debuggingOutput.current = error;
@@ -86,19 +71,36 @@ export default function Content() {
 	};
 
 	const quickCheats = () => {
-		const formData = new FormData();
-		formData.append("file", file!);
-
 		setToShowSpinner(true);
 
-		axios.post(`${apiRoot}/quick-cheats`, formData, axiosRequestConfig)
-			.then(response => response.data)
-			.then(downloadFile)
+		axios.post<Blob>(`${apiRoot}/quick-cheats`, generateFormData(), axiosRequestConfig)
+			.then(({ data }) => downloadFile(data))
 			.catch(error => {
 				console.error(error);
 				debuggingOutput.current = error;
 			})
 			.finally(() => setToShowSpinner(false));
+	};
+
+	const generateFormData = (toSubmitEdits: boolean = false) => {
+		if (!file) {
+			throw Error(`File is ${file}!`);
+		}
+
+		const formData = new FormData();
+		formData.append("file", file);
+
+		if (toSubmitEdits) {
+			const stringified = JSON.stringify({ company, rosters, items, quests });
+			const blob = new Blob(
+				[stringified],
+				{ type: "application/json" }
+			);
+
+			formData.append("edited", blob);
+		}
+
+		return formData;
 	};
 
 	const resetComponents = () => {
