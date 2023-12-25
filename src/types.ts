@@ -1,3 +1,10 @@
+export interface SaveData {
+	company: CompanyInfo;
+	items: ItemCollection;
+	quests: QuestCollection;
+	rosters: RosterCollection;
+}
+
 interface Properties {
 	[key: string]: string;
 }
