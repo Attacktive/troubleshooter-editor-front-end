@@ -30,7 +30,7 @@ export default function Company({ company, setCompany, readonly = false }: { com
 			<Col>
 				<FormGroup>
 					<FormLabel>ID</FormLabel>
-					<FormControl type="number" defaultValue={company.id} readOnly/>
+					<FormControl type="number" value={company.id} readOnly/>
 				</FormGroup>
 				<FormGroup className="mt-2">
 					<FormLabel>Name</FormLabel>
