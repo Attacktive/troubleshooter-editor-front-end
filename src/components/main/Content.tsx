@@ -161,16 +161,16 @@ export default function Content() {
 			<Row as="form" ref={mainForm} className="mt-4">
 				<Col>
 					<Tabs>
-						<Tab title="Company" eventKey="company">
+						<Tab title="Company" eventKey="company" mountOnEnter={true} unmountOnExit={true}>
 							<Company company={company} setCompany={setCompany}/>
 						</Tab>
-						<Tab title="Items" eventKey="items">
+						<Tab title="Items" eventKey="items" mountOnEnter={true} unmountOnExit={true}>
 							<Item items={items} readonly={true}/>
 						</Tab>
-						<Tab title="Rosters" eventKey="rosters">
+						<Tab title="Rosters" eventKey="rosters" mountOnEnter={true} unmountOnExit={true}>
 							<Roster rosters={rosters} readonly={true}/>
 						</Tab>
-						<Tab title="Quests" eventKey="quests">
+						<Tab title="Quests" eventKey="quests" mountOnEnter={true} unmountOnExit={true}>
 							<Quest quests={quests} readonly={true}/>
 						</Tab>
 					</Tabs>
