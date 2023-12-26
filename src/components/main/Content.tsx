@@ -63,7 +63,7 @@ export default function Content() {
 		setToShowSpinner(true);
 
 		axios.post<Blob>(`${apiRoot}/save`, generateFormData(true), axiosRequestConfig)
-			.then(({ data }) => downloadFile(data))
+			.then(({ data: blob }) => downloadFile(blob))
 			.catch(error => {
 				console.error(error);
 				debuggingOutput.current = error;
@@ -75,7 +75,7 @@ export default function Content() {
 		setToShowSpinner(true);
 
 		axios.post<Blob>(`${apiRoot}/quick-cheats`, generateFormData(), axiosRequestConfig)
-			.then(({ data }) => downloadFile(data))
+			.then(({ data: blob }) => downloadFile(blob))
 			.catch(error => {
 				console.error(error);
 				debuggingOutput.current = error;
