@@ -1,11 +1,13 @@
-const reportWebVitals = (reportCallback?: (any: any) => void) => {
+import { CLSMetric, FCPMetric, FIDMetric, LCPMetric, TTFBMetric } from "web-vitals";
+
+const reportWebVitals = (reportCallback?: (...any: any) => void) => {
 	if (reportCallback) {
 		import("web-vitals").then(({ onCLS, onFID, onFCP, onLCP, onTTFB }) => {
-			onCLS(reportCallback);
-			onFID(reportCallback);
-			onFCP(reportCallback);
-			onLCP(reportCallback);
-			onTTFB(reportCallback);
+			onCLS((metric: CLSMetric) => reportCallback("CLS", metric));
+			onFID((metric: FIDMetric) => reportCallback("FID", metric));
+			onFCP((metric: FCPMetric) => reportCallback("FCP", metric));
+			onLCP((metric: LCPMetric) => reportCallback("LCP", metric));
+			onTTFB((metric: TTFBMetric) => reportCallback("TTFB", metric));
 		});
 	}
 };
