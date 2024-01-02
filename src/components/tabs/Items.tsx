@@ -3,14 +3,14 @@ import { Accordion, Col, FormControl, FormGroup, FormLabel, FormSelect, FormText
 import AccordionItem from "react-bootstrap/AccordionItem";
 import AccordionHeader from "react-bootstrap/AccordionHeader";
 import AccordionBody from "react-bootstrap/AccordionBody";
-import { isItemStatus, ItemCollection, ItemInfo, ItemStatus } from "types";
+import { isItemStatus, ItemCollection, ItemInfo } from "types";
 
-type AssignmentFunction<T> = (item: ItemInfo, value: T) => void;
+type AssignmentFunction = (item: ItemInfo) => void;
 
-function updateItem<T>(items: ItemCollection, setItems: Dispatch<SetStateAction<ItemCollection>>, assignmentFunction: AssignmentFunction<T>, id: number, value: T) {
+function updateItem(items: ItemCollection, setItems: Dispatch<SetStateAction<ItemCollection>>, assignmentFunction: AssignmentFunction, id: number) {
 	const currentItem = items.find(item => item.id === id);
 	if (currentItem) {
-		assignmentFunction(currentItem, value);
+		assignmentFunction(currentItem);
 		setItems(items);
 	} else {
 		console.warn(`Failed to find Item with id ${id}; does nothing.`);
@@ -19,40 +19,48 @@ function updateItem<T>(items: ItemCollection, setItems: Dispatch<SetStateAction<
 
 export default function Item({ items, setItems, readonly = false }: { items: ItemCollection, setItems: Dispatch<SetStateAction<ItemCollection>>, readonly: boolean }) {
 	const setType = (event: ChangeEvent<HTMLInputElement>, id: number) => {
-		updateItem(items, setItems, (item: ItemInfo, value: string) => item.type = value, id, event.target.value);
+		const assignmentFunction = (item: ItemInfo) => item.type = event.target.value;
+		updateItem(items, setItems, assignmentFunction, id);
 	};
 
 	const setCount = (event: ChangeEvent<HTMLInputElement>, id: number) => {
-		updateItem(items, setItems, (item: ItemInfo, value: number) => item.count = value, id, event.target.valueAsNumber);
+		const assignmentFunction = (item: ItemInfo) => item.count = event.target.valueAsNumber;
+		updateItem(items, setItems, assignmentFunction, id);
 	};
 
 	const setStatus = (event: ChangeEvent<HTMLSelectElement>, id: number) => {
 		const status = event.target.value;
 		if (isItemStatus(status)) {
-			updateItem(items, setItems, (item: ItemInfo, value: ItemStatus) => item.status = value, id, status);
+			const assignmentFunction = (item: ItemInfo) => item.status = status;
+			updateItem(items, setItems, assignmentFunction, id);
 		} else {
 			console.warn(`The status ${status} is not a valid status value for an Item; does nothing.`);
 		}
 	}
 
 	const setIsBound = (event: ChangeEvent<HTMLSelectElement>, id: number) => {
-		updateItem(items, setItems, (item: ItemInfo, value: string) => item.properties["Binded"] = value, id, event.target.value);
+		const assignmentFunction = (item: ItemInfo) => item.properties["Binded"] = event.target.value;
+		updateItem(items, setItems, assignmentFunction, id);
 	};
 
 	const setOptionRatio = (event: ChangeEvent<HTMLInputElement>, id: number) => {
-		updateItem(items, setItems, (item: ItemInfo, value: string) => item.properties["Option/OptionRatio"] = value, id, event.target.value);
+		const assignmentFunction = (item: ItemInfo) => item.properties["Option/OptionRatio"] = event.target.value;
+		updateItem(items, setItems, assignmentFunction, id);
 	};
 
 	const setOptionKey = (event: ChangeEvent<HTMLInputElement>, id: number) => {
-		updateItem(items, setItems, (item: ItemInfo, value: string) => item.properties["Option/OptionKey"] = value, id, event.target.value);
+		const assignmentFunction = (item: ItemInfo) => item.properties["Option/OptionKey"] = event.target.value;
+		updateItem(items, setItems, assignmentFunction, id);
 	}
 
 	const setOptionType = (event: ChangeEvent<HTMLInputElement>, id: number, ordinal: number) => {
-		updateItem(items, setItems, (item: ItemInfo, value: string) => item.properties[`Option/Type${ordinal}`] = value, id, event.target.value);
+		const assignmentFunction = (item: ItemInfo) => item.properties[`Option/Type${ordinal}`] = event.target.value;
+		updateItem(items, setItems, assignmentFunction, id);
 	}
 
 	const setOptionValue = (event: ChangeEvent<HTMLInputElement>, id: number, ordinal: number) => {
-		updateItem(items, setItems, (item: ItemInfo, value: string) => item.properties[`Option/Value${ordinal}`] = value, id, event.target.value);
+		const assignmentFunction = (item: ItemInfo) => item.properties[`Option/Value${ordinal}`] = event.target.value;
+		updateItem(items, setItems, assignmentFunction, id);
 	}
 
 	const optionOptions = ["Accuracy", "Armor", "AttackPower", "Block", "BluntResistance", "CriticalStrikeChance", "CriticalStrikeDeal", "Dodge", "EarthResistance", "ESPPower", "FireResistance", "IceResistance", "LightningResistance", "MaxAddSP", "MaxHP", "MaxVigor", "MoveDist", "OverchargeDuration", "PiercingResistance", "RegenVigor", "Resistance", "SightRange", "SlashingResistance", "Speed", "WaterResistance", "WindResistance"]
