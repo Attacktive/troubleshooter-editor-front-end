@@ -165,7 +165,7 @@ export default function Content() {
 							<Company company={company} setCompany={setCompany}/>
 						</Tab>
 						<Tab title="Items" eventKey="items" mountOnEnter={true} unmountOnExit={true}>
-							<Item items={items} setItems={setItems} readonly={true}/>
+							<Item items={items} setItems={setItems}/>
 						</Tab>
 						<Tab title="Rosters" eventKey="rosters" mountOnEnter={true} unmountOnExit={true}>
 							<Roster rosters={rosters} readonly={true}/>

@@ -17,7 +17,7 @@ function updateItem(items: ItemCollection, setItems: Dispatch<SetStateAction<Ite
 	}
 }
 
-export default function Item({ items, setItems, readonly = false }: { items: ItemCollection, setItems: Dispatch<SetStateAction<ItemCollection>>, readonly: boolean }) {
+export default function Item({ items, setItems, readonly = false }: { items: ItemCollection, setItems: Dispatch<SetStateAction<ItemCollection>>, readonly?: boolean }) {
 	const setType = (event: ChangeEvent<HTMLInputElement>, id: number) => {
 		const assignmentFunction = (item: ItemInfo) => item.type = event.target.value;
 		updateItem(items, setItems, assignmentFunction, id);
