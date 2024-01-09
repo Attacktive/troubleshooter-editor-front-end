@@ -9,7 +9,7 @@ import Quest from "components/tabs/Quests";
 import Spinner from "./Spinner";
 
 const apiRoot = import.meta.env.VITE_API_ROOT;
-const axiosRequestConfig: AxiosRequestConfig = { responseType: "blob" };
+const axiosRequestConfigForFileDownload: AxiosRequestConfig = { responseType: "blob" };
 
 export default function Content() {
 	const mainForm = useRef<HTMLFormElement>(null);
@@ -62,7 +62,7 @@ export default function Content() {
 	const save = () => {
 		setToShowSpinner(true);
 
-		axios.post<Blob>(`${apiRoot}/save`, generateFormData(true), axiosRequestConfig)
+		axios.post<Blob>(`${apiRoot}/save`, generateFormData(true), axiosRequestConfigForFileDownload)
 			.then(({ data: blob }) => downloadFile(blob))
 			.catch(error => {
 				console.error(error);
@@ -74,7 +74,7 @@ export default function Content() {
 	const quickCheats = () => {
 		setToShowSpinner(true);
 
-		axios.post<Blob>(`${apiRoot}/quick-cheats`, generateFormData(), axiosRequestConfig)
+		axios.post<Blob>(`${apiRoot}/quick-cheats`, generateFormData(), axiosRequestConfigForFileDownload)
 			.then(({ data: blob }) => downloadFile(blob))
 			.catch(error => {
 				console.error(error);
