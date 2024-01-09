@@ -13,6 +13,7 @@ const axiosRequestConfigForFileDownload: AxiosRequestConfig = { responseType: "b
 
 export default function Content() {
 	const mainForm = useRef<HTMLFormElement>(null);
+	const fileInput = useRef<HTMLInputElement>(null);
 	const debuggingOutput = useRef("");
 
 	const [fileIsUploaded, setFileIsUploaded] = useState(false);
@@ -135,6 +136,10 @@ export default function Content() {
 	};
 
 	const resetComponents = () => {
+		if (fileInput.current) {
+			fileInput.current.files = null;
+		}
+
 		setCompany(defaultCompany);
 		setItems([]);
 		setRosters([]);
@@ -157,7 +162,7 @@ export default function Content() {
 			<Row className="mt-2">
 				<Col xs={4}>
 					<FormGroup>
-						<FormControl type="file" accept={".sav,.bak"} onChange={(event: ChangeEvent<HTMLInputElement>) => onFileChange(event)}/>
+						<FormControl type="file" ref={fileInput} accept={".sav,.bak"} onChange={(event: ChangeEvent<HTMLInputElement>) => onFileChange(event)}/>
 					</FormGroup>
 				</Col>
 				<Col xs={2}>
