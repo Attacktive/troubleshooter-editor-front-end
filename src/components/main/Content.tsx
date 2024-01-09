@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useMemo, useRef, useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
-import { CompanyInfo, defaultCompany, ItemCollection, Properties, QuestCollection, RosterCollection, SaveData, truncateCompanyInfo, truncateItems } from "types";
+import { CompanyInfo, defaultCompany, ItemCollection, QuestCollection, RosterCollection, SaveData, truncateCompanyInfo, truncateItems } from "types";
 import { Button, Col, FormControl, FormGroup, Row, Tab, Tabs } from "react-bootstrap";
 import Company from "components/tabs/Company";
 import Roster from "components/tabs/Rosters";
@@ -14,7 +14,6 @@ const axiosRequestConfigForFileDownload: AxiosRequestConfig = { responseType: "b
 export default function Content() {
 	const mainForm = useRef<HTMLFormElement>(null);
 	const debuggingOutput = useRef("");
-	const companyProperties = useRef<Properties>();
 
 	const [fileIsUploaded, setFileIsUploaded] = useState(false);
 	const [toShowSpinner, setToShowSpinner] = useState(false);
@@ -101,8 +100,6 @@ export default function Content() {
 
 	const truncateSaveData = (saveData: SaveData): SaveData => {
 		const { company, items, quests, rosters } = saveData;
-
-		companyProperties.current = company.properties;
 
 		const truncatedCompany = truncateCompanyInfo(company);
 		const truncatedItems = truncateItems(items);
