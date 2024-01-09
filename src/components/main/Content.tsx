@@ -75,29 +75,29 @@ export default function Content() {
 		setFileIsUploaded(false);
 	};
 
-	const save = () => {
+	const download = async (subUrl: string) => {
 		setToShowSpinner(true);
 
-		axios.post<Blob>(`${apiRoot}/save`, generateFormData(true), axiosRequestConfigForFileDownload)
-			.then(({ data: blob }) => downloadFile(blob))
-			.catch(error => {
-				console.error(error);
-				debuggingOutput.current = error;
-			})
-			.finally(() => setToShowSpinner(false));
-	};
+		try {
+			const { data: blob } = await axios.post<Blob>(`${apiRoot}/${subUrl}`, generateFormData(true), axiosRequestConfigForFileDownload);
+			return downloadFile(blob);
+		} catch (error) {
+			console.error(error);
 
-	const quickCheats = () => {
-		setToShowSpinner(true);
+			if (error instanceof Error) {
+				debuggingOutput.current = error.toString();
+			} else {
+				const nonErrorError = error as any;
+				debuggingOutput.current = `caught ${nonErrorError.constructor.name}: ${nonErrorError.toString()}`;
+			}
+		} finally {
+			setToShowSpinner(false);
+		}
+	}
 
-		axios.post<Blob>(`${apiRoot}/quick-cheats`, generateFormData(), axiosRequestConfigForFileDownload)
-			.then(({ data: blob }) => downloadFile(blob))
-			.catch(error => {
-				console.error(error);
-				debuggingOutput.current = error;
-			})
-			.finally(() => setToShowSpinner(false));
-	};
+	const save = () => download("save");
+
+	const quickCheats = () => download("quick-cheats");
 
 	const truncateSaveData = (saveData: SaveData): SaveData => {
 		const { company, items, quests, rosters } = saveData;
