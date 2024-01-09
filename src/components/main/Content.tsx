@@ -24,11 +24,20 @@ export default function Content() {
 	const [rosters, setRosters] = useState<RosterCollection>([]);
 	const [quests, setQuests] = useState<QuestCollection>([]);
 
-	const fileIsSelected = useMemo(() => file, [file]);
+	const fileIsSelected = useMemo(() => Boolean(file), [file]);
+	const uploadResetButtonLabel: "Reset" | "Upload" = useMemo(() => fileIsUploaded? "Reset" : "Upload", [fileIsUploaded]);
 
 	const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setFile(event.target.files?.[0]);
 	};
+
+	const uploadOrReset = () => {
+		if (fileIsUploaded) {
+			resetFile();
+		} else {
+			upload();
+		}
+	}
 
 	const upload = () => {
 		setToShowSpinner(true);
@@ -57,6 +66,13 @@ export default function Content() {
 				setFileIsUploaded(false);
 			})
 			.finally(() => setToShowSpinner(false));
+	};
+
+	const resetFile = () => {
+		debuggingOutput.current = "";
+		resetComponents();
+		setFile(undefined);
+		setFileIsUploaded(false);
 	};
 
 	const save = () => {
@@ -148,7 +164,7 @@ export default function Content() {
 					</FormGroup>
 				</Col>
 				<Col xs={2}>
-					<Button type="button" disabled={!fileIsSelected} onClick={upload}>Upload</Button>
+					<Button type="button" onClick={uploadOrReset}>{uploadResetButtonLabel}</Button>
 				</Col>
 				<Col>
 					<Button type="button" disabled={!fileIsSelected || !fileIsUploaded} onClick={save}>Save</Button>
