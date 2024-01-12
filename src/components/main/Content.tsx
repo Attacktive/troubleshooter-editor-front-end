@@ -13,7 +13,6 @@ const axiosRequestConfigForFileDownload: AxiosRequestConfig = { responseType: "b
 
 export default function Content() {
 	const mainForm = useRef<HTMLFormElement>(null);
-	const fileInput = useRef<HTMLInputElement>(null);
 	const debuggingOutput = useRef("");
 
 	const [fileIsUploaded, setFileIsUploaded] = useState(false);
@@ -136,9 +135,10 @@ export default function Content() {
 	};
 
 	const resetComponents = () => {
-		if (fileInput.current) {
-			fileInput.current.files = null;
-		}
+		// I think DOM manipulation like this isn't ideal, but it seems like React Bootstrap can't really clear the current file selection.
+		const fileInput = document.querySelector("#file-input") as HTMLInputElement;
+		fileInput.value = "";
+		fileInput.files = null;
 
 		setCompany(defaultCompany);
 		setItems([]);
@@ -162,7 +162,7 @@ export default function Content() {
 			<Row className="mt-2">
 				<Col xs={4}>
 					<FormGroup>
-						<FormControl type="file" ref={fileInput} accept={".sav,.bak"} onChange={(event: ChangeEvent<HTMLInputElement>) => onFileChange(event)}/>
+						<FormControl type="file" id="file-input" accept={".sav,.bak"} onChange={(event: ChangeEvent<HTMLInputElement>) => onFileChange(event)}/>
 					</FormGroup>
 				</Col>
 				<Col xs={2}>
