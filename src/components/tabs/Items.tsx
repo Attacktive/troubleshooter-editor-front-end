@@ -133,7 +133,7 @@ export default function Item({ items, setItems, readonly = false }: { items: Ite
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Option Ratio</FormLabel>
-											<FormControl type="number" value={item.properties?.["Option/OptionRatio"]} disabled={readonly} onInput={(event: ChangeEvent<HTMLInputElement>) => setOptionRatio(event, item.id)}/>
+											<FormControl type="number" value={item.properties?.["Option/OptionRatio"]} step={0.01} disabled={readonly} onInput={(event: ChangeEvent<HTMLInputElement>) => setOptionRatio(event, item.id)}/>
 										</FormGroup>
 										<FormGroup className="mt-2">
 											<FormLabel>Option Key</FormLabel>
